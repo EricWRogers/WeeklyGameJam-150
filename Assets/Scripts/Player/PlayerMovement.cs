@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    PlayerInputActions inputActions;
     CharacterController charController;
 
     Vector2 movementInput;
@@ -13,15 +13,13 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake()
     {
-        inputActions = new PlayerInputActions();
-        inputActions.PlayerControls.Movement.performed += ctx => movementInput = ctx.ReadValue<Vector2>();
 
         charController = GetComponent<CharacterController>();
     }
 
-    void OnEnable()
+    void OnMovement(InputValue inputValue)
     {
-        inputActions.Enable();
+        movementInput = inputValue.Get<Vector2>();
     }
 
     void Update()
