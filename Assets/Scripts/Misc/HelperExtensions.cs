@@ -171,6 +171,20 @@ public static class HelperExtensions
 
     #endregion
 
+    #region Dictionary
+
+    public static TN GetOrDefault<TK, TV, TN>(this Dictionary<TK, TV> self, TK key, TN defaultValue) where TN: TV
+    {
+        if (self.ContainsKey(key))
+        {
+            return (TN) self[key];
+        }
+
+        return defaultValue;
+    }
+
+    #endregion
+
     #region Bounds
 
     public static BoundSides GetSides(this Bounds obj, bool includePosition = true)
