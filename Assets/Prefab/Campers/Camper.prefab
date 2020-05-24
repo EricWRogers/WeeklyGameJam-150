@@ -192,3 +192,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d80afc70c0fa3484ea4daa00cd5de1c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  avatar: {fileID: 2747985652559344592}
+  maxVisionRange: 30
+  maxVisionAngle: 30
+  maxHideDurationRange:
+    min: 10
+    max: 20
+    selectedDebug: 
+  _btnMoveToNewHidingSpot: 0
+  _canSeePlayer: 0
