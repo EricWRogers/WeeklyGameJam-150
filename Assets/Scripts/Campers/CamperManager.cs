@@ -3,19 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class CamperManager : MonoBehaviour
+public class CamperManager : SingletonMonoBehaviour<CamperManager>
 {
     public GameObject camperPrefab;
     public Transform hidingSpotsContainer;
 
     public int campersCount = 6;
 
-    [HideInInspector] public List<Camper> campers = new List<Camper>();
-    private Randomizer<HidingSpot> hidingSpotsRandomizer;
+    public List<Camper> campers { get; } = new List<Camper>();
+    public Randomizer<HidingSpot> hidingSpotsRandomizer { get; private set; }
 
-    void Awake()
+    new void Awake()
     {
+        base.Awake();
+
         hidingSpotsRandomizer = new Randomizer<HidingSpot>(hidingSpotsContainer.GetComponentsInChildren<HidingSpot>());
+        if (hidingSpotsRandomizer.count <= 0)
+        {
+            Debug.LogWarning("No Hiding Spots Found");
+        }
+
         SpawnCampers();
     }
 

@@ -5,7 +5,9 @@ using UnityEngine;
 [Serializable]
 public class Randomizer<T>
 {
-    public List<T> items = new List<T>();
+    private readonly List<T> items = new List<T>();
+
+    public int count => items.Count;
 
     private int nextItemIndex = 0;
     
@@ -52,5 +54,10 @@ public class Randomizer<T>
         }
 
         return items[nextItemIndex++];
+    }
+
+    public List<T> GetItems()
+    {
+        return new List<T>(items);
     }
 }
