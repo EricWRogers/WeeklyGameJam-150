@@ -24,39 +24,54 @@ public class PunchProps
 }
 
 [Serializable]
-public class RangeFloat
+public class RangeFloat: AbstractRange<float>
 {
-    public float min;
-    public float max;
-
-    public RangeFloat(float _min, float _max)
+    public RangeFloat(float _min, float _max) : base(_min, _max)
     {
-        min = _min;
-        max = _max;
     }
 
-    public float GetRandom()
+    public override float GetRandom()
     {
         return Random.Range(min, max);
     }
 }
 
 [Serializable]
-public class RangeInt
+public class RangeInt : AbstractRange<int>
 {
-    public int min;
-    [Tooltip("Inclusive")] public int max;
+    public RangeInt(int _min, int _max) : base(_min, _max)
+    {
+    }
 
-    public RangeInt(int _min, int _max)
+    public override int GetRandom()
+    {
+        return Random.Range(min, max + 1);
+    }
+}
+
+[Serializable]
+public abstract class AbstractRange<T> where T : struct
+{
+    public T min;
+    [Tooltip("Inclusive")] public T max;
+
+    public T? selected { get; private set; }
+
+    [SerializeField] [ReadOnly] private string selectedDebug = "";
+
+    protected AbstractRange(T _min, T _max)
     {
         min = _min;
         max = _max;
     }
 
-    public float GetRandom()
+    public void SelectRandom()
     {
-        return Random.Range(min, max + 1);
+        selected = GetRandom();
+        selectedDebug = selected.ToString();
     }
+
+    public abstract T GetRandom();
 }
 
 public class HelperUtilities
@@ -210,7 +225,8 @@ public class HelperUtilities
         //Change the gizmo matrix to the relative space of the boxCollider.
         //This makes offsets with rotation work
         //Source: https://forum.unity.com/threads/gizmo-rotation.4817/#post-3242447
-        Gizmos.matrix = Matrix4x4.TRS(collider.transform.TransformPoint(collider.center), collider.transform.rotation, collider.transform.lossyScale);
+        Gizmos.matrix = Matrix4x4.TRS(collider.transform.TransformPoint(collider.center), collider.transform.rotation,
+            collider.transform.lossyScale);
 
         //Draws the edges of the BoxCollider
         //Center is Vector3.zero, since we've transformed the calculation space in the previous step.
@@ -222,12 +238,14 @@ public class HelperUtilities
         Gizmos.DrawCube(Vector3.zero, collider.size);
     }
 
-    public static void DrawGizmosForRelativeBounds(Bounds bounds, Transform transform, Color borderColor, Color fillColor)
+    public static void DrawGizmosForRelativeBounds(Bounds bounds, Transform transform, Color borderColor,
+        Color fillColor)
     {
         //Change the gizmo matrix to the relative space of the boxCollider.
         //This makes offsets with rotation work
         //Source: https://forum.unity.com/threads/gizmo-rotation.4817/#post-3242447
-        Gizmos.matrix = Matrix4x4.TRS(transform.TransformPoint(bounds.center), transform.rotation, transform.lossyScale);
+        Gizmos.matrix =
+            Matrix4x4.TRS(transform.TransformPoint(bounds.center), transform.rotation, transform.lossyScale);
 
         //Draws the edges of the BoxCollider
         //Center is Vector3.zero, since we've transformed the calculation space in the previous step.

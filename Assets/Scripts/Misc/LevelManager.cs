@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelManager : SingletonMonoBehaviour<LevelManager>
 {
-    [Header("Dev Helpers")] [SerializeField] private Transform playerMockLocation;
+    [Header("Dev Tools")] [SerializeField] private Transform playerMockLocation;
 
     public Transform playerLocation => playerMockLocation;  // TODO (Azee): Switch this to the actual player transform
 

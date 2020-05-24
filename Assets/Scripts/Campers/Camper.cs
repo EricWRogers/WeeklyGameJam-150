@@ -6,6 +6,10 @@ using UnityEngine.AI;
 
 public class Camper : MonoBehaviour
 {
+    [Header("Hiding Params")]
+    public RangeFloat maxHideDurationRange;
+
+    [Header("Dev Tools")]
     [SerializeField] [Button("Move to new hiding spot", "MoveToNewHidingSpot")]
     private bool _btnMoveToNewHidingSpot;
 
