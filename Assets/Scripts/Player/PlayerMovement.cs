@@ -10,18 +10,21 @@ public class PlayerMovement : MonoBehaviour
     
     public GameObject cinemachine;
     public CinemachineBrain cinemachineBrain;
-    CinemachineFreeLook freeLookCam;
+    public GameObject avatar;
 
     Vector2 movementInput;
+    Vector3 movementVector;
 
     public float speed;
+    public float rotationSpeed;
 
     void Awake()
     {
         charController = GetComponent<CharacterController>();
-        freeLookCam = cinemachine.GetComponent<CinemachineFreeLook>();
 
         HelperUtilities.UpdateCursorLock(true);
+
+        movementVector = Vector3.zero;
     }
 
     void OnMovement(InputValue inputValue)
@@ -44,8 +47,12 @@ public class PlayerMovement : MonoBehaviour
     {
         float h = movementInput.x;
         float v = movementInput.y;
-        Vector3 movementVector = new Vector3(h, 0, v);
-        movementVector = OrientPlayer(movementVector);
+        movementVector = new Vector3(h, 0, v);
+        if (movementVector != Vector3.zero)
+        {
+            movementVector = OrientPlayer(movementVector);
+            avatar.transform.rotation = Quaternion.Slerp(avatar.transform.rotation, Quaternion.LookRotation(movementVector, transform.up), rotationSpeed * Time.deltaTime);
+        }
 
         charController.Move(movementVector * speed * Time.deltaTime);
     }
