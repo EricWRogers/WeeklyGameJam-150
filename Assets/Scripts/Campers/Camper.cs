@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using BasicTools.ButtonInspector;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -26,7 +27,8 @@ public class Camper : MonoBehaviour
     [Header("Stats")] public float maxVisionRange = 30;
     public float maxVisionAngle = 45;
 
-    [Header("Hiding Params")] public RangeFloat maxHideDurationRange;
+    [Header("Hiding Params")] public float hidingOrientationChangeDuration = 0.3f;
+    public RangeFloat maxHideDurationRange;
     public float maxDistanceToSenseMonster = 5;
 
     [Header("Dev Tools")] [SerializeField] [Button("Move to new hiding spot", "MoveToNewHidingSpot")]
@@ -185,6 +187,7 @@ public class Camper : MonoBehaviour
         {
             case CamperState.Hiding:
                 animator.SetBool("hiding", false);
+                transform.DOKill(true);
                 break;
             case CamperState.Moving:
                 animator.SetBool("running", false);
@@ -202,6 +205,18 @@ public class Camper : MonoBehaviour
                 navMeshAgent.ResetPath();
                 animator.SetBool("hiding", true);
                 curStateData.metaData["timeout"] = maxHideDurationRange.GetRandom();
+
+                var hidingSpotNearby = CamperManager.Instance.hidingSpotsRandomizer.GetItems().Find(hidingSpot =>
+                    Vector3.Distance(transform.position, hidingSpot.transform.position) <=
+                    navMeshAgent.stoppingDistance * 2);
+
+                curStateData.metaData["hidingSpot"] = hidingSpotNearby;
+
+                if (hidingSpotNearby)
+                {
+                    var lookAtTarget = transform.position + hidingSpotNearby.facingDir;
+                    transform.DOLookAt(lookAtTarget, hidingOrientationChangeDuration).Play();
+                }
                 break;
             case CamperState.Moving:
                 animator.SetBool("running", true);
