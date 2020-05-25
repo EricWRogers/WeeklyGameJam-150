@@ -7,7 +7,8 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
     [Header("Dev Tools")] [SerializeField] private Transform playerMockLocation;
 
     public Transform playerLocation => playerMockLocation;  // TODO (Azee): Switch this to the actual player transform
-
+    public PlayerModel player;
+    
     // Start is called before the first frame update
     void Start()
     {

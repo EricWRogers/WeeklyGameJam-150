@@ -15,8 +15,12 @@ public class PlayerMovement : MonoBehaviour
     Vector2 movementInput;
     Vector3 movementVector;
 
-    public float speed;
-    public float rotationSpeed;
+    public float speed = 5;
+    public float rotationSpeed = 4;
+    public float gravity = 10;
+
+    [Range(0.01f, 1f)]
+    public float minimumGravity = 0.01f;
 
     void Awake()
     {
@@ -52,6 +56,15 @@ public class PlayerMovement : MonoBehaviour
         {
             movementVector = OrientPlayer(movementVector);
             avatar.transform.rotation = Quaternion.Slerp(avatar.transform.rotation, Quaternion.LookRotation(movementVector, transform.up), rotationSpeed * Time.deltaTime);
+        }
+
+        if (!charController.isGrounded)
+        {
+            movementVector.y -= gravity;
+        }
+        else
+        {
+            movementVector.y -= minimumGravity;
         }
 
         charController.Move(movementVector * speed * Time.deltaTime);
