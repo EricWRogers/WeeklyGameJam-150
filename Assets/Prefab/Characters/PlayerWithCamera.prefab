@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2136243793}
-  m_LocalRotation: {x: 0.23987685, y: 0.000000014015632, z: -0.0000000017513756, w: 0.9708033}
+  m_LocalRotation: {x: 0.23987685, y: 0.000000014015633, z: -0.0000000017513759, w: 0.9708033}
   m_LocalPosition: {x: 0, y: 2.5000002, z: -4.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -373,8 +373,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4373487821891506436}
-  m_LocalRotation: {x: 0.23987684, y: -0.0000000147220165, z: 0.0000000046101696,
-    w: 0.9708034}
+  m_LocalRotation: {x: 0.23987684, y: -0.000000014722015, z: 0.000000004610161, w: 0.9708034}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -742,7 +741,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4373487822764697153}
-  m_LocalRotation: {x: 0.23987682, y: -2.8737718e-10, z: 0.0000000011630299, w: 0.9708034}
+  m_LocalRotation: {x: 0.23987684, y: 0.000000014178722, z: -0.000000002411414, w: 0.9708034}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1133,8 +1132,7 @@ PrefabInstance:
       propertyPath: cinemachineBrain
       value: 
       objectReference: {fileID: 2136243798}
-    m_RemovedComponents:
-    - {fileID: 1569631115, guid: a7b4c41f67d7a984fafcb26ea57a0355, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7b4c41f67d7a984fafcb26ea57a0355, type: 3}
 --- !u!4 &4373487822659989236 stripped
 Transform:
