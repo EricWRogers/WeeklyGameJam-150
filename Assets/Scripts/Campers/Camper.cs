@@ -21,6 +21,7 @@ public class CamperStateData
 public class Camper : MonoBehaviour
 {
     [Header("References")] public GameObject avatar;
+    public Transform visionRoot;
 
     [Header("Stats")] public float maxVisionRange = 30;
     public float maxVisionAngle = 45;
@@ -38,8 +39,8 @@ public class Camper : MonoBehaviour
     [SerializeField] [ReadOnly] private CamperStateData curStateData = new CamperStateData();
 
     private NavMeshAgent navMeshAgent;
+    private Animator animator;
 
-    public Transform visionRoot => avatar.transform;
     public CamperState curState => _curState;
     public CamperState prevState => _prevState;
 
@@ -51,6 +52,8 @@ public class Camper : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        animator = avatar.GetComponentInChildren<Animator>();
+
         SwitchState(CamperState.Hiding);
     }
 
@@ -125,6 +128,8 @@ public class Camper : MonoBehaviour
                     return;
                 }
 
+                // TODO (Azee): If player is too close, move to new hiding spot
+
                 break;
             case CamperState.Moving:
                 if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
@@ -150,6 +155,12 @@ public class Camper : MonoBehaviour
         // On State Exit
         switch (_prevState)
         {
+            case CamperState.Hiding:
+                animator.SetBool("hiding", false);
+                break;
+            case CamperState.Moving:
+                animator.SetBool("running", false);
+                break;
             default:
                 break;
         }
@@ -161,9 +172,11 @@ public class Camper : MonoBehaviour
         {
             case CamperState.Hiding:
                 navMeshAgent.ResetPath();
+                animator.SetBool("hiding", true);
                 curStateData.metaData["timeout"] = maxHideDurationRange.GetRandom();
                 break;
             case CamperState.Moving:
+                animator.SetBool("running", true);
                 navMeshAgent.SetDestination(data.GetOrDefault("target", navMeshAgent.transform.position));
                 break;
             default:
