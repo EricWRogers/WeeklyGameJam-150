@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerModel : MonoBehaviour
+public class PlayerModel : SingletonMonoBehaviour<PlayerModel>
 {
     public PlayerMovement playerMovement { get; private set; }
-    void Awake()
+    new void Awake()
     {
+        base.Awake();
         playerMovement = GetComponent<PlayerMovement>();
     }
 }
