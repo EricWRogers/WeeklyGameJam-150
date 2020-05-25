@@ -27,12 +27,15 @@ public class Camper : MonoBehaviour
     public float maxVisionAngle = 45;
 
     [Header("Hiding Params")] public RangeFloat maxHideDurationRange;
+    public float maxDistanceToSenseMonster = 5;
 
     [Header("Dev Tools")] [SerializeField] [Button("Move to new hiding spot", "MoveToNewHidingSpot")]
     private bool _btnMoveToNewHidingSpot;
 
     [Header("Logs")] [SerializeField] [ReadOnly]
-    private bool _canSeePlayer;
+    private bool _canSeePlayer = false;
+
+    [SerializeField] [ReadOnly] private bool _isLineToPlayerBlocked = true;
 
     [SerializeField] [ReadOnly] private CamperState _curState;
     [SerializeField] [ReadOnly] private CamperState _prevState;
@@ -60,7 +63,8 @@ public class Camper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _canSeePlayer = CanSeePlayer();
+        ComputeIsLineToPlayerBlocked();
+        ComputeCanSeePlayer();
 
         UpdateState();
     }
@@ -69,6 +73,7 @@ public class Camper : MonoBehaviour
     {
         DebugExtension.DebugCone(visionRoot.position, visionRoot.forward * maxVisionRange, Color.yellow,
             maxVisionAngle);
+        DebugExtension.DebugWireSphere(transform.position, Color.red, maxDistanceToSenseMonster);
     }
 
     public void MoveToNewHidingSpot()
@@ -85,8 +90,26 @@ public class Camper : MonoBehaviour
         return CamperManager.Instance.hidingSpotsRandomizer.GetRandomItem();
     }
 
-    public bool CanSeePlayer()
+    private void ComputeIsLineToPlayerBlocked()
     {
+        _isLineToPlayerBlocked = true;
+
+        var playerLoc = LevelManager.Instance.playerLocation;
+        var toPlayer = playerLoc.position - visionRoot.position;
+
+        if (Physics.Raycast(visionRoot.position, toPlayer.normalized, out var hit))
+        {
+            if (hit.transform.CompareTag("Player"))
+            {
+                _isLineToPlayerBlocked = false;
+            }
+        }
+    }
+
+    private void ComputeCanSeePlayer()
+    {
+        _canSeePlayer = false;
+
         var playerLoc = LevelManager.Instance.playerLocation;
 
         var toPlayer = playerLoc.position - visionRoot.position;
@@ -96,17 +119,12 @@ public class Camper : MonoBehaviour
             var angleToPlayer = Vector3.Angle(visionRoot.forward, toPlayer.normalized);
             if (angleToPlayer <= maxVisionAngle)
             {
-                if (Physics.Raycast(visionRoot.position, toPlayer.normalized, out var hit, maxVisionRange))
+                if (!_isLineToPlayerBlocked)
                 {
-                    if (hit.transform.CompareTag("Player"))
-                    {
-                        return true;
-                    }
+                    _canSeePlayer = true;
                 }
             }
         }
-
-        return false;
     }
 
     void UpdateState()
@@ -128,7 +146,17 @@ public class Camper : MonoBehaviour
                     return;
                 }
 
-                // TODO (Azee): If player is too close, move to new hiding spot
+                if (!_isLineToPlayerBlocked)
+                {
+                    var playerLoc = LevelManager.Instance.playerLocation;
+                    var toPlayer = playerLoc.position - visionRoot.position;
+
+                    if (toPlayer.magnitude <= maxDistanceToSenseMonster)
+                    {
+                        MoveToNewHidingSpot();
+                        return;
+                    }
+                }
 
                 break;
             case CamperState.Moving:
