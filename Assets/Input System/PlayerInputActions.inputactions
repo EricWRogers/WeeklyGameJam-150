@@ -12,14 +12,6 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
-                },
-                {
-                    "name": "Look",
-                    "type": "Value",
-                    "id": "b37d7f48-0acd-4495-a959-a4f211bbe6ed",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -132,28 +124,6 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "f1870ad3-2c9f-4c66-ab30-6b09ef478b7d",
-                    "path": "<Pointer>/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "3eff8697-7fa3-4734-92cf-13116aa7e45b",
-                    "path": "<Gamepad>/rightStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         }
