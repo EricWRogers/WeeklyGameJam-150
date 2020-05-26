@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using BasicTools.ButtonInspector;
 using DG.Tweening;
 using UnityEngine;
@@ -90,9 +91,9 @@ public class Camper : MonoBehaviour
         });
     }
 
-    public void MoveToNewHidingSpot()
+    public void MoveToNewHidingSpot(HidingSpot overrideHidingSpot = null)
     {
-        var hidingSpot = FindNewHidingSpot();
+        var hidingSpot = overrideHidingSpot ?? FindNewHidingSpot();
         SwitchState(CamperState.Moving, new Dictionary<string, object>
         {
             {"target", hidingSpot.transform.position},
@@ -175,6 +176,24 @@ public class Camper : MonoBehaviour
 
                 break;
             case CamperState.Moving:
+                if (_canSeePlayer)
+                {
+                    var toPlayer = LevelManager.Instance.playerLocation.position - transform.position;
+                    var toDestination = navMeshAgent.destination - transform.position;
+
+                    if (Vector3.Angle(toPlayer, toDestination) <= maxVisionAngle)
+                    {
+                        var availableHidingSpots = CamperManager.Instance.hidingSpotsRandomizer.GetItems().Where(hidingSpot =>
+                        {
+                            var toHidingSpot = hidingSpot.transform.position - transform.position;
+                            return Vector3.Angle(toPlayer, toHidingSpot) > maxVisionAngle;
+                        }).ToList();
+
+                        MoveToNewHidingSpot(availableHidingSpots.Count > 0 ? availableHidingSpots.GetRandom() : null);
+                        return;
+                    }
+                }
+
                 if (Vector3.Distance(transform.position, navMeshAgent.destination) <= navMeshAgent.stoppingDistance)
                 {
                     SwitchState(curStateData.metaData.GetOrDefault("stateOnReachedTarget", CamperState.Hiding));
