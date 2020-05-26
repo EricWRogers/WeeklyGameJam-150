@@ -10,8 +10,16 @@ public class CamperManager : SingletonMonoBehaviour<CamperManager>
 
     public int campersCount = 6;
 
+    [Header("Run to TargetBase Stats")]
+    public RangeFloat initialRunToTargetBaseDelayRange;
+    public RangeFloat runToTargetBaseIntervalRange;
+    public RangeInt campersPerTargetRunRange;
+    public float minTargetBaseToPlayerAngleToRun = 30f;
+
     public List<Camper> campers { get; } = new List<Camper>();
     public Randomizer<HidingSpot> hidingSpotsRandomizer { get; private set; }
+
+    private float timeSinceLastRunToTargetBase = 0;
 
     new void Awake()
     {
@@ -29,11 +37,63 @@ public class CamperManager : SingletonMonoBehaviour<CamperManager>
     // Start is called before the first frame update
     void Start()
     {
+        initialRunToTargetBaseDelayRange.SelectRandom();
     }
 
     // Update is called once per frame
     void Update()
     {
+        timeSinceLastRunToTargetBase += Time.deltaTime;
+
+        var curRunToTargetBaseDelayRange = runToTargetBaseIntervalRange.selected.HasValue
+            ? runToTargetBaseIntervalRange
+            : initialRunToTargetBaseDelayRange;
+
+        if (timeSinceLastRunToTargetBase >= curRunToTargetBaseDelayRange.selected)
+        {
+            timeSinceLastRunToTargetBase = 0;
+            runToTargetBaseIntervalRange.SelectRandom();
+
+            if (!TargetBase.Instance.isPlayerGuarding)
+            {
+                var targetToPlayer = PlayerModel.Instance.transform.position - TargetBase.Instance.transform.position;
+
+                var runnableCampers = campers.Where(camper =>
+                {
+                    if (camper.curState != CamperState.Hiding)
+                    {
+                        return false;
+                    }
+
+                    var targetToCamper = camper.transform.position - TargetBase.Instance.transform.position;
+                    if (targetToPlayer.magnitude > targetToCamper.magnitude)
+                    {
+                        return true;
+                    }
+
+                    if (Vector3.Angle(targetToPlayer, targetToCamper) < minTargetBaseToPlayerAngleToRun)
+                    {
+                        return false;
+                    }
+
+                    return true;
+                }).ToList();
+
+                var selectedCampersToRun = new HashSet<Camper>();
+                var runnableCampersRandomizer = new Randomizer<Camper>(runnableCampers);
+
+                campersPerTargetRunRange.SelectRandom();
+                for (int i = 0; i < campersPerTargetRunRange.selected; i++)
+                {
+                    selectedCampersToRun.Add(runnableCampersRandomizer.GetRandomItem());
+                }
+
+                foreach (var camper in selectedCampersToRun)
+                {
+                    camper.RunToTargetBase();
+                }
+            }
+        }
     }
 
     void SpawnCampers()

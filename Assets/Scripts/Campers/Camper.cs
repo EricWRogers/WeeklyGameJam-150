@@ -10,6 +10,8 @@ public enum CamperState
 {
     Hiding,
     Moving,
+    Captured,
+    Safe,
 }
 
 [Serializable]
@@ -23,6 +25,7 @@ public class Camper : MonoBehaviour
 {
     [Header("References")] public GameObject avatar;
     public Transform visionRoot;
+    public NavMeshAgent navMeshAgent;
 
     [Header("Stats")] public float maxVisionRange = 30;
     public float maxVisionAngle = 45;
@@ -43,7 +46,6 @@ public class Camper : MonoBehaviour
     [SerializeField] [ReadOnly] private CamperState _prevState;
     [SerializeField] [ReadOnly] private CamperStateData curStateData = new CamperStateData();
 
-    private NavMeshAgent navMeshAgent;
     private Animator animator;
 
     public CamperState curState => _curState;
@@ -51,7 +53,7 @@ public class Camper : MonoBehaviour
 
     void Awake()
     {
-        navMeshAgent = GetComponent<NavMeshAgent>();
+
     }
 
     // Start is called before the first frame update
@@ -76,6 +78,16 @@ public class Camper : MonoBehaviour
         DebugExtension.DebugCone(visionRoot.position, visionRoot.forward * maxVisionRange, Color.yellow,
             maxVisionAngle);
         DebugExtension.DebugWireSphere(transform.position, Color.red, maxDistanceToSenseMonster);
+        DebugExtension.DebugWireSphere(transform.position, Color.cyan, navMeshAgent.stoppingDistance);
+    }
+
+    public void RunToTargetBase()
+    {
+        SwitchState(CamperState.Moving, new Dictionary<string, object>
+        {
+            {"target", TargetBase.Instance.transform.position},
+            {"stateOnReachedTarget", CamperState.Safe},
+        });
     }
 
     public void MoveToNewHidingSpot()
@@ -84,6 +96,7 @@ public class Camper : MonoBehaviour
         SwitchState(CamperState.Moving, new Dictionary<string, object>
         {
             {"target", hidingSpot.transform.position},
+            {"stateOnReachedTarget", CamperState.Hiding},
         });
     }
 
@@ -162,9 +175,9 @@ public class Camper : MonoBehaviour
 
                 break;
             case CamperState.Moving:
-                if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
+                if (Vector3.Distance(transform.position, navMeshAgent.destination) <= navMeshAgent.stoppingDistance)
                 {
-                    SwitchState(CamperState.Hiding);
+                    SwitchState(curStateData.metaData.GetOrDefault("stateOnReachedTarget", CamperState.Hiding));
                     return;
                 }
 
@@ -196,13 +209,13 @@ public class Camper : MonoBehaviour
                 break;
         }
 
+        navMeshAgent.ResetPath();
         curStateData = new CamperStateData();
 
         // On State Enter
         switch (_curState)
         {
             case CamperState.Hiding:
-                navMeshAgent.ResetPath();
                 animator.SetBool("hiding", true);
                 curStateData.metaData["timeout"] = maxHideDurationRange.GetRandom();
 
@@ -217,10 +230,17 @@ public class Camper : MonoBehaviour
                     var lookAtTarget = transform.position + hidingSpotNearby.facingDir;
                     transform.DOLookAt(lookAtTarget, hidingOrientationChangeDuration).Play();
                 }
+
                 break;
             case CamperState.Moving:
                 animator.SetBool("running", true);
+                curStateData.metaData["stateOnReachedTarget"] =
+                    data.GetOrDefault("stateOnReachedTarget", CamperState.Hiding);
+
                 navMeshAgent.SetDestination(data.GetOrDefault("target", navMeshAgent.transform.position));
+                break;
+            case CamperState.Safe:
+                animator.SetBool("hiding", true);
                 break;
             default:
                 break;
