@@ -34,6 +34,11 @@ public class PlayerMovement : MonoBehaviour
         movementVector = Vector3.zero;
     }
 
+    void OnEnable()
+    {
+        Debug.Log("This Work");
+    }
+
     void OnMovement(InputValue inputValue)
     {
         movementInput = inputValue.Get<Vector2>();

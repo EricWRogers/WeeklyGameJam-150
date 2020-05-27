@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 7645608698683339009}
   - component: {fileID: 3683141596007942747}
   - component: {fileID: 7645608698683339008}
-  - component: {fileID: 4853751391983169732}
+  - component: {fileID: 1237112136169324630}
   - component: {fileID: -8668021825920797966}
   m_Layer: 0
   m_Name: Player
@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 178c0a842543e5548a74c8fc08d3da46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerState: 0
 --- !u!114 &7645608698683339008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,7 +166,7 @@ MonoBehaviour:
   gravity: 10
   minimumGravity: 0.01
   canMove: 1
---- !u!114 &4853751391983169732
+--- !u!114 &1237112136169324630
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -174,10 +175,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 7645608698683339002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 602465b0d80fb3a49b96afa9b5817faa, type: 3}
+  m_Script: {fileID: 11500000, guid: e3d54a9a6613f56448537dfb0a302aeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerState: 0
+  currentKey: 0
+  QTEBuffer: 5
+  QTETimer: 2
+  maxQuickTimeEvents:
+    min: 3
+    max: 7
+    selectedDebug: 
 --- !u!114 &-8668021825920797966
 MonoBehaviour:
   m_ObjectHideFlags: 0

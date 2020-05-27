@@ -6,10 +6,15 @@ using UnityEngine.InputSystem;
 public class PlayerModel : SingletonMonoBehaviour<PlayerModel>
 {
     public PlayerMovement playerMovement { get; private set; }
+    public QTEManager qteManager { get; private set; }
+
     new void Awake()
     {
         base.Awake();
         playerMovement = GetComponent<PlayerMovement>();
+        
+        qteManager = GetComponent<QTEManager>();
+        qteManager.enabled = false;
     }
 
     public enum PlayerState
@@ -20,8 +25,6 @@ public class PlayerModel : SingletonMonoBehaviour<PlayerModel>
 
     public PlayerState playerState = PlayerState.Moving;
 
-    private bool interactPressed = false;
-
     void OnAttack(InputValue inputValue)
     {
         if (playerState == PlayerState.Moving)
@@ -30,21 +33,21 @@ public class PlayerModel : SingletonMonoBehaviour<PlayerModel>
         }
         else if(playerState == PlayerState.Attacking)
         {
-            ChangeState(PlayerState.Moving);
+            ChangeState(PlayerState.Moving);   
         }
+        
     }
 
-    void ChangeState(PlayerState state)
+    public void ChangeState(PlayerState state)
     {
         switch (state)
         {
             case PlayerState.Moving:
                 playerMovement.canMove = true;
-                //Disable QTE
                 Debug.Log("Moving");
                 break;
             case PlayerState.Attacking:
-                //Enable QTE
+                qteManager.enabled = true;
                 playerMovement.canMove = false;
                 Debug.Log("Attacking");
                 break;
