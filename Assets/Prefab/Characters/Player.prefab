@@ -100,12 +100,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentKey: 0
-  QTEBuffer: 5
+  maxQTEBuffer:
+    min: 2
+    max: 5
+    selectedDebug: 
+  QTEBuffer: 0
   QTETimer: 2
   maxQuickTimeEvents:
     min: 3
     max: 7
     selectedDebug: 
+  QTETextMesh: {fileID: 0}
+  QTETimerImage: {fileID: 0}
 --- !u!114 &-8668021825920797966
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,14 +15,14 @@ public class QTEManager : MonoBehaviour
     }
 
     public QTEOptions currentKey;
-    public float QTEBuffer;
+    public RangeFloat maxQTEBuffer;
+    public float QTEBuffer = 0;
     public float QTETimer;
     public RangeInt maxQuickTimeEvents;
 
     public TMPro.TextMeshProUGUI QTETextMesh;
     public UnityEngine.UI.Image QTETimerImage;
 
-    private float maxQTEBuffer = 0;
     private float maxQTETimer = 0;
     private int currentPasses = 0;
 
@@ -31,7 +31,7 @@ public class QTEManager : MonoBehaviour
 
     void Awake()
     {
-        maxQTEBuffer = QTEBuffer;
+        QTEBuffer = maxQTEBuffer.GetRandom();
         maxQTETimer = QTETimer;
     }
 
@@ -42,7 +42,7 @@ public class QTEManager : MonoBehaviour
         canGetNextKey = true;
         checkQTETimer = false;
 
-        QTEBuffer = maxQTEBuffer;
+        QTEBuffer = maxQTEBuffer.GetRandom();
         QTETimer = maxQTETimer;
 
         currentPasses = 0;
@@ -129,6 +129,9 @@ public class QTEManager : MonoBehaviour
             PlayerModel.Instance.ChangeState(PlayerModel.PlayerState.Moving);
             this.enabled = false;
         }
+
+        QTETextMesh.text = "";
+        QTETimerImage.fillAmount = 0;
     }
 
     void OnQuickTimeNorth(InputValue inputValue)
@@ -141,7 +144,8 @@ public class QTEManager : MonoBehaviour
 
                 checkQTETimer = false;
                 canGetNextKey = true;
-                QTEBuffer = maxQTEBuffer;
+
+                QTEBuffer = maxQTEBuffer.GetRandom();
 
                 Debug.Log("Good!");
             }
@@ -162,7 +166,8 @@ public class QTEManager : MonoBehaviour
 
                 checkQTETimer = false;
                 canGetNextKey = true;
-                QTEBuffer = maxQTEBuffer;
+
+                QTEBuffer = maxQTEBuffer.GetRandom();
 
                 Debug.Log("Good!");
             }
@@ -183,7 +188,8 @@ public class QTEManager : MonoBehaviour
 
                 checkQTETimer = false;
                 canGetNextKey = true;
-                QTEBuffer = maxQTEBuffer;
+
+                QTEBuffer = maxQTEBuffer.GetRandom();
 
                 Debug.Log("Good!");
             }
@@ -204,7 +210,8 @@ public class QTEManager : MonoBehaviour
 
                 checkQTETimer = false;
                 canGetNextKey = true;
-                QTEBuffer = maxQTEBuffer;
+
+                QTEBuffer = maxQTEBuffer.GetRandom();
 
                 Debug.Log("Good!");
             }
