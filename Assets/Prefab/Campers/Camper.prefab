@@ -98,7 +98,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 1.6
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -115,6 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   avatar: {fileID: 2747985652559344592}
+  model: {fileID: 6513597977166954292}
   visionRoot: {fileID: 6977836763913514759}
   navMeshAgent: {fileID: 2747985653096566257}
   maxVisionRange: 30

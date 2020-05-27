@@ -8,6 +8,8 @@ public class CamperManager : SingletonMonoBehaviour<CamperManager>
     public GameObject camperPrefab;
     public Transform hidingSpotsContainer;
 
+    public List<GameObject> camperModelPrefabs;
+
     public int campersCount = 6;
 
     [Header("Run to TargetBase Stats")]
@@ -18,6 +20,7 @@ public class CamperManager : SingletonMonoBehaviour<CamperManager>
 
     public List<Camper> campers { get; } = new List<Camper>();
     public Randomizer<HidingSpot> hidingSpotsRandomizer { get; private set; }
+    public Randomizer<GameObject> camperModelPrefabsRandomizer { get; private set; }
 
     private float timeSinceLastRunToTargetBase = 0;
 
@@ -30,6 +33,8 @@ public class CamperManager : SingletonMonoBehaviour<CamperManager>
         {
             Debug.LogWarning("No Hiding Spots Found");
         }
+
+        camperModelPrefabsRandomizer = new Randomizer<GameObject>(camperModelPrefabs);
 
         SpawnCampers();
     }

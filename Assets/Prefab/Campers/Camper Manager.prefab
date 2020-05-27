@@ -46,6 +46,7 @@ MonoBehaviour:
   camperPrefab: {fileID: 2747985653096566259, guid: c6dde71b1d8f2054fa3833bf4a88e1fe,
     type: 3}
   hidingSpotsContainer: {fileID: 0}
+  camperModelPrefabs: []
   campersCount: 6
   initialRunToTargetBaseDelayRange:
     min: 10

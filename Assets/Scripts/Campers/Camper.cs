@@ -25,6 +25,7 @@ public class CamperStateData
 public class Camper : MonoBehaviour
 {
     [Header("References")] public GameObject avatar;
+    public GameObject model;
     public Transform visionRoot;
     public NavMeshAgent navMeshAgent;
 
@@ -61,6 +62,7 @@ public class Camper : MonoBehaviour
     void Start()
     {
         animator = avatar.GetComponentInChildren<Animator>();
+        RandomizeModel();
 
         SwitchState(CamperState.Hiding);
     }
@@ -80,6 +82,28 @@ public class Camper : MonoBehaviour
             maxVisionAngle);
         DebugExtension.DebugWireSphere(transform.position, Color.red, maxDistanceToSenseMonster);
         DebugExtension.DebugWireSphere(transform.position, Color.cyan, navMeshAgent.stoppingDistance);
+    }
+
+    public void RandomizeModel()
+    {
+        if (CamperManager.Instance.camperModelPrefabsRandomizer.count > 0)
+        {
+            ChangeModel(CamperManager.Instance.camperModelPrefabsRandomizer.GetRandomItem());
+        }
+    }
+
+    public void ChangeModel(GameObject modelPrefab)
+    {
+        var newModel = Instantiate(modelPrefab, model.transform.parent);
+        newModel.transform.localPosition = model.transform.localPosition;
+        newModel.transform.localRotation = model.transform.localRotation;
+
+        var newAnimator = newModel.AddComponent<Animator>();
+        newAnimator.runtimeAnimatorController = animator.runtimeAnimatorController;
+
+        model.SetActive(false);
+        model = newModel;
+        animator = newAnimator;
     }
 
     public void RunToTargetBase()

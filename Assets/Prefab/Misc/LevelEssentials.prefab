@@ -394,9 +394,92 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2248416557730463912, guid: bb626c708b629914795092286b650415,
         type: 3}
+      propertyPath: camperModelPrefabs.Array.size
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 2248416557730463912, guid: bb626c708b629914795092286b650415,
+        type: 3}
       propertyPath: hidingSpotsContainer
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2248416557730463912, guid: bb626c708b629914795092286b650415,
+        type: 3}
+      propertyPath: camperModelPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: -927199367670048503, guid: 6df129034350f5542b63dae495eec184,
+        type: 3}
+    - target: {fileID: 2248416557730463912, guid: bb626c708b629914795092286b650415,
+        type: 3}
+      propertyPath: camperModelPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: -927199367670048503, guid: a97af9471ac3a59428978dcf292e4bea,
+        type: 3}
+    - target: {fileID: 2248416557730463912, guid: bb626c708b629914795092286b650415,
+        type: 3}
+      propertyPath: camperModelPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: -927199367670048503, guid: 2d4d43cbd58bb104ba1bb06ffaafb984,
+        type: 3}
+    - target: {fileID: 2248416557730463912, guid: bb626c708b629914795092286b650415,
+        type: 3}
+      propertyPath: camperModelPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: -927199367670048503, guid: ea217f9dcfca80942a4f33be11e714cf,
+        type: 3}
+    - target: {fileID: 2248416557730463912, guid: bb626c708b629914795092286b650415,
+        type: 3}
+      propertyPath: camperModelPrefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: -927199367670048503, guid: 9a99f7892ea537b4e902aea53f4ed03b,
+        type: 3}
+    - target: {fileID: 2248416557730463912, guid: bb626c708b629914795092286b650415,
+        type: 3}
+      propertyPath: camperModelPrefabs.Array.data[5]
+      value: 
+      objectReference: {fileID: -927199367670048503, guid: 4f11d4ce070e153459dfba9bbcb5c746,
+        type: 3}
+    - target: {fileID: 2248416557730463912, guid: bb626c708b629914795092286b650415,
+        type: 3}
+      propertyPath: camperModelPrefabs.Array.data[6]
+      value: 
+      objectReference: {fileID: -927199367670048503, guid: d96bb48cbaefc42418b2b30490c87de9,
+        type: 3}
+    - target: {fileID: 2248416557730463912, guid: bb626c708b629914795092286b650415,
+        type: 3}
+      propertyPath: camperModelPrefabs.Array.data[7]
+      value: 
+      objectReference: {fileID: -927199367670048503, guid: ba9915f1d0f51ec458e017bcd42b6836,
+        type: 3}
+    - target: {fileID: 2248416557730463912, guid: bb626c708b629914795092286b650415,
+        type: 3}
+      propertyPath: camperModelPrefabs.Array.data[8]
+      value: 
+      objectReference: {fileID: -927199367670048503, guid: f6829dfd7ff07184f9b9b0597729ac4b,
+        type: 3}
+    - target: {fileID: 2248416557730463912, guid: bb626c708b629914795092286b650415,
+        type: 3}
+      propertyPath: camperModelPrefabs.Array.data[9]
+      value: 
+      objectReference: {fileID: -927199367670048503, guid: 17216007ee22f4f4ebb360b60e4b8aaf,
+        type: 3}
+    - target: {fileID: 2248416557730463912, guid: bb626c708b629914795092286b650415,
+        type: 3}
+      propertyPath: camperModelPrefabs.Array.data[10]
+      value: 
+      objectReference: {fileID: -927199367670048503, guid: 8335ee2376053a44fa036f0799632ba2,
+        type: 3}
+    - target: {fileID: 2248416557730463912, guid: bb626c708b629914795092286b650415,
+        type: 3}
+      propertyPath: camperModelPrefabs.Array.data[11]
+      value: 
+      objectReference: {fileID: -927199367670048503, guid: 9d259664bdc6bd34191f0fb9ff1e728a,
+        type: 3}
+    - target: {fileID: 2248416557730463912, guid: bb626c708b629914795092286b650415,
+        type: 3}
+      propertyPath: camperModelPrefabs.Array.data[12]
+      value: 
+      objectReference: {fileID: -927199367670048503, guid: 2523f4346481b6747a59e692afbd43cd,
+        type: 3}
     - target: {fileID: 2248416557730463913, guid: bb626c708b629914795092286b650415,
         type: 3}
       propertyPath: m_LocalPosition.x

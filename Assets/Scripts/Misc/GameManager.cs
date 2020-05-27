@@ -38,6 +38,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             return;
         }
 
+        transform.SetParent(null);
         DontDestroyOnLoad(gameObject);
 
         InputSystem.onEvent += (ptr, device) => { lastDetectedDevice = device; };
