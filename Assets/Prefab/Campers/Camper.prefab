@@ -116,8 +116,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   avatar: {fileID: 2747985652559344592}
   visionRoot: {fileID: 6977836763913514759}
+  navMeshAgent: {fileID: 2747985653096566257}
   maxVisionRange: 30
   maxVisionAngle: 30
+  hidingOrientationChangeDuration: 0.3
   maxHideDurationRange:
     min: 10
     max: 20

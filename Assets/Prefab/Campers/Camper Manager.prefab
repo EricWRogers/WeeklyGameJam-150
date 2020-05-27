@@ -46,3 +46,17 @@ MonoBehaviour:
   camperPrefab: {fileID: 2747985653096566259, guid: c6dde71b1d8f2054fa3833bf4a88e1fe,
     type: 3}
   hidingSpotsContainer: {fileID: 0}
+  campersCount: 6
+  initialRunToTargetBaseDelayRange:
+    min: 10
+    max: 15
+    selectedDebug: 
+  runToTargetBaseIntervalRange:
+    min: 10
+    max: 15
+    selectedDebug: 
+  campersPerTargetRunRange:
+    min: 0
+    max: 1
+    selectedDebug: 
+  minTargetBaseToPlayerAngleToRun: 30
