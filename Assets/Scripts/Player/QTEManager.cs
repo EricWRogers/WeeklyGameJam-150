@@ -115,6 +115,8 @@ public class QTEManager : MonoBehaviour
                 checkQTETimer = false;
                 canGetNextKey = true;
                 QTEBuffer = maxQTEBuffer;
+
+                Debug.Log("Good!");
             }
             else
             {
@@ -134,6 +136,8 @@ public class QTEManager : MonoBehaviour
                 checkQTETimer = false;
                 canGetNextKey = true;
                 QTEBuffer = maxQTEBuffer;
+
+                Debug.Log("Good!");
             }
             else
             {
@@ -153,6 +157,8 @@ public class QTEManager : MonoBehaviour
                 checkQTETimer = false;
                 canGetNextKey = true;
                 QTEBuffer = maxQTEBuffer;
+
+                Debug.Log("Good!");
             }
             else
             {
@@ -172,6 +178,8 @@ public class QTEManager : MonoBehaviour
                 checkQTETimer = false;
                 canGetNextKey = true;
                 QTEBuffer = maxQTEBuffer;
+
+                Debug.Log("Good!");
             }
             else
             {
