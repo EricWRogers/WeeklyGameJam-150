@@ -19,8 +19,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 {
     private const string gameSettingsFileName = "gameSettings.dat";
 
-    public static GameManager Instance = null;
-
     [Header("Scene Names")]
     public string mainMenuScene = "MainMenu";
     public string mainLevelScene = "Main";
