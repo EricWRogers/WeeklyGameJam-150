@@ -8,7 +8,6 @@ public class PlayerMovement : MonoBehaviour
 {
     CharacterController charController;
     
-    public GameObject cinemachine;
     public CinemachineBrain cinemachineBrain;
     public GameObject avatar;
 

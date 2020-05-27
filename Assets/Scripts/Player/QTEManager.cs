@@ -20,8 +20,11 @@ public class QTEManager : MonoBehaviour
     public float QTETimer;
     public RangeInt maxQuickTimeEvents;
 
-    public TMPro.TextMeshProUGUI QTETextMesh;
     public UnityEngine.UI.Image QTETimerImage;
+    public InputKeyUI northKey;
+    public InputKeyUI southKey;
+    public InputKeyUI westKey;
+    public InputKeyUI eastKey;
 
     private float maxQTETimer = 0;
     private int currentPasses = 0;
@@ -47,7 +50,6 @@ public class QTEManager : MonoBehaviour
 
         currentPasses = 0;
 
-        QTETextMesh.text = "";
         QTETimerImage.enabled = true;
         QTETimerImage.fillAmount = 0;
     }
@@ -56,7 +58,10 @@ public class QTEManager : MonoBehaviour
     {
         canGetNextKey = true;
 
-        QTETextMesh.text = "";
+        northKey.gameObject.SetActive(false);
+        southKey.gameObject.SetActive(false);
+        westKey.gameObject.SetActive(false);
+        eastKey.gameObject.SetActive(false);
         QTETimerImage.enabled = false;
     }
 
@@ -93,16 +98,16 @@ public class QTEManager : MonoBehaviour
             switch (currentKey)
             {
                 case QTEOptions.North:
-                    QTETextMesh.text = "W";
+                    northKey.gameObject.SetActive(true);
                     break;
                 case QTEOptions.South:
-                    QTETextMesh.text = "S";
+                    southKey.gameObject.SetActive(true);
                     break;
                 case QTEOptions.West:
-                    QTETextMesh.text = "A";
+                    westKey.gameObject.SetActive(true);
                     break;
                 case QTEOptions.East:
-                    QTETextMesh.text = "D";
+                    eastKey.gameObject.SetActive(true);
                     break;
             }
 
@@ -130,7 +135,6 @@ public class QTEManager : MonoBehaviour
             this.enabled = false;
         }
 
-        QTETextMesh.text = "";
         QTETimerImage.fillAmount = 0;
     }
 
@@ -147,6 +151,7 @@ public class QTEManager : MonoBehaviour
 
                 QTEBuffer = maxQTEBuffer.GetRandom();
 
+                northKey.gameObject.SetActive(false);
                 Debug.Log("Good!");
             }
             else
@@ -169,6 +174,7 @@ public class QTEManager : MonoBehaviour
 
                 QTEBuffer = maxQTEBuffer.GetRandom();
 
+                southKey.gameObject.SetActive(false);
                 Debug.Log("Good!");
             }
             else
@@ -191,6 +197,7 @@ public class QTEManager : MonoBehaviour
 
                 QTEBuffer = maxQTEBuffer.GetRandom();
 
+                westKey.gameObject.SetActive(false);
                 Debug.Log("Good!");
             }
             else
@@ -213,6 +220,7 @@ public class QTEManager : MonoBehaviour
 
                 QTEBuffer = maxQTEBuffer.GetRandom();
 
+                eastKey.gameObject.SetActive(false);
                 Debug.Log("Good!");
             }
             else
