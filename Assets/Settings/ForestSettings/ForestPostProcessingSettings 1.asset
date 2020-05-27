@@ -472,7 +472,7 @@ MonoBehaviour:
     m_Value: -1.8
   limitMin:
     m_OverrideState: 1
-    m_Value: 6.12
+    m_Value: 5.81
   limitMax:
     m_OverrideState: 1
     m_Value: 10
@@ -503,15 +503,15 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   adaptationMode:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   adaptationSpeedDarkToLight:
-    m_OverrideState: 0
-    m_Value: 3
+    m_OverrideState: 1
+    m_Value: 10
     min: 0.001
   adaptationSpeedLightToDark:
-    m_OverrideState: 0
-    m_Value: 1
+    m_OverrideState: 1
+    m_Value: 10
     min: 0.001
 --- !u!114 &7528787496838712568
 MonoBehaviour:
