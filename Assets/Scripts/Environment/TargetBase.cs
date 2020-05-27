@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TargetBase : SingletonMonoBehaviour<TargetBase>
 {
-    [Header("References")] public SphereCollider safeAreaCollider;
+    [Header("References")] public CapsuleCollider safeAreaCollider;
     public SphereCollider musicAreaTrigger;
 
     [Header("Zone Stats")] public float safeRadius;
