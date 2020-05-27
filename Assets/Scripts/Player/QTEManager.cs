@@ -19,6 +19,9 @@ public class QTEManager : MonoBehaviour
     public float QTETimer;
     public RangeInt maxQuickTimeEvents;
 
+    public TMPro.TextMeshProUGUI QTETextMesh;
+    public UnityEngine.UI.Image QTETimerImage;
+
     private float maxQTEBuffer = 0;
     private float maxQTETimer = 0;
     private int currentPasses = 0;
@@ -43,11 +46,18 @@ public class QTEManager : MonoBehaviour
         QTETimer = maxQTETimer;
 
         currentPasses = 0;
+
+        QTETextMesh.text = "";
+        QTETimerImage.enabled = true;
+        QTETimerImage.fillAmount = 0;
     }
 
     void OnDisable()
     {
         canGetNextKey = true;
+
+        QTETextMesh.text = "";
+        QTETimerImage.enabled = false;
     }
 
     void Update()
@@ -61,6 +71,8 @@ public class QTEManager : MonoBehaviour
         {
             QTETimer -= Time.deltaTime;
 
+            QTETimerImage.fillAmount = (((QTETimer - 0) * (1 - 0)) / (maxQTETimer - 0)) + 0;
+            
             if (QTETimer <= 0)
             {
                 Fail();
@@ -78,10 +90,25 @@ public class QTEManager : MonoBehaviour
             currentKey = (QTEOptions)Random.Range(0, (int)QTEOptions.QTEOptionsSize);
             Debug.Log(currentKey);
 
-            //Display Button
+            switch (currentKey)
+            {
+                case QTEOptions.North:
+                    QTETextMesh.text = "W";
+                    break;
+                case QTEOptions.South:
+                    QTETextMesh.text = "S";
+                    break;
+                case QTEOptions.West:
+                    QTETextMesh.text = "A";
+                    break;
+                case QTEOptions.East:
+                    QTETextMesh.text = "D";
+                    break;
+            }
 
             checkQTETimer = true;
             QTETimer = maxQTETimer;
+            QTETimerImage.fillAmount = 1;
 
             canGetNextKey = false;
         }
