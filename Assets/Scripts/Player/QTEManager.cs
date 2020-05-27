@@ -15,11 +15,14 @@ public class QTEManager : MonoBehaviour
     }
 
     public QTEOptions currentKey;
-    public float QTEBuffer;
+    public RangeFloat maxQTEBuffer;
+    public float QTEBuffer = 0;
     public float QTETimer;
     public RangeInt maxQuickTimeEvents;
 
-    private float maxQTEBuffer = 0;
+    public TMPro.TextMeshProUGUI QTETextMesh;
+    public UnityEngine.UI.Image QTETimerImage;
+
     private float maxQTETimer = 0;
     private int currentPasses = 0;
 
@@ -28,7 +31,7 @@ public class QTEManager : MonoBehaviour
 
     void Awake()
     {
-        maxQTEBuffer = QTEBuffer;
+        QTEBuffer = maxQTEBuffer.GetRandom();
         maxQTETimer = QTETimer;
     }
 
@@ -39,15 +42,22 @@ public class QTEManager : MonoBehaviour
         canGetNextKey = true;
         checkQTETimer = false;
 
-        QTEBuffer = maxQTEBuffer;
+        QTEBuffer = maxQTEBuffer.GetRandom();
         QTETimer = maxQTETimer;
 
         currentPasses = 0;
+
+        QTETextMesh.text = "";
+        QTETimerImage.enabled = true;
+        QTETimerImage.fillAmount = 0;
     }
 
     void OnDisable()
     {
         canGetNextKey = true;
+
+        QTETextMesh.text = "";
+        QTETimerImage.enabled = false;
     }
 
     void Update()
@@ -61,6 +71,8 @@ public class QTEManager : MonoBehaviour
         {
             QTETimer -= Time.deltaTime;
 
+            QTETimerImage.fillAmount = (((QTETimer - 0) * (1 - 0)) / (maxQTETimer - 0)) + 0;
+            
             if (QTETimer <= 0)
             {
                 Fail();
@@ -78,10 +90,25 @@ public class QTEManager : MonoBehaviour
             currentKey = (QTEOptions)Random.Range(0, (int)QTEOptions.QTEOptionsSize);
             Debug.Log(currentKey);
 
-            //Display Button
+            switch (currentKey)
+            {
+                case QTEOptions.North:
+                    QTETextMesh.text = "W";
+                    break;
+                case QTEOptions.South:
+                    QTETextMesh.text = "S";
+                    break;
+                case QTEOptions.West:
+                    QTETextMesh.text = "A";
+                    break;
+                case QTEOptions.East:
+                    QTETextMesh.text = "D";
+                    break;
+            }
 
             checkQTETimer = true;
             QTETimer = maxQTETimer;
+            QTETimerImage.fillAmount = 1;
 
             canGetNextKey = false;
         }
@@ -102,6 +129,9 @@ public class QTEManager : MonoBehaviour
             PlayerModel.Instance.ChangeState(PlayerModel.PlayerState.Moving);
             this.enabled = false;
         }
+
+        QTETextMesh.text = "";
+        QTETimerImage.fillAmount = 0;
     }
 
     void OnQuickTimeNorth(InputValue inputValue)
@@ -114,7 +144,8 @@ public class QTEManager : MonoBehaviour
 
                 checkQTETimer = false;
                 canGetNextKey = true;
-                QTEBuffer = maxQTEBuffer;
+
+                QTEBuffer = maxQTEBuffer.GetRandom();
 
                 Debug.Log("Good!");
             }
@@ -135,7 +166,8 @@ public class QTEManager : MonoBehaviour
 
                 checkQTETimer = false;
                 canGetNextKey = true;
-                QTEBuffer = maxQTEBuffer;
+
+                QTEBuffer = maxQTEBuffer.GetRandom();
 
                 Debug.Log("Good!");
             }
@@ -156,7 +188,8 @@ public class QTEManager : MonoBehaviour
 
                 checkQTETimer = false;
                 canGetNextKey = true;
-                QTEBuffer = maxQTEBuffer;
+
+                QTEBuffer = maxQTEBuffer.GetRandom();
 
                 Debug.Log("Good!");
             }
@@ -177,7 +210,8 @@ public class QTEManager : MonoBehaviour
 
                 checkQTETimer = false;
                 canGetNextKey = true;
-                QTEBuffer = maxQTEBuffer;
+
+                QTEBuffer = maxQTEBuffer.GetRandom();
 
                 Debug.Log("Good!");
             }
