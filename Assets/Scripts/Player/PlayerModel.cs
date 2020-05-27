@@ -44,12 +44,12 @@ public class PlayerModel : SingletonMonoBehaviour<PlayerModel>
         {
             case PlayerState.Moving:
                 playerMovement.canMove = true;
-                Debug.Log("Moving");
+                
                 break;
             case PlayerState.Attacking:
                 qteManager.enabled = true;
                 playerMovement.canMove = false;
-                Debug.Log("Attacking");
+                
                 break;
         }
 
