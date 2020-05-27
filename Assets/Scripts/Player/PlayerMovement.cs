@@ -22,6 +22,9 @@ public class PlayerMovement : MonoBehaviour
     [Range(0.01f, 1f)]
     public float minimumGravity = 0.01f;
 
+    [HideInInspector]
+    public bool canMove = true;
+
     void Awake()
     {
         charController = GetComponent<CharacterController>();
@@ -47,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
         return (forwardDir + rightDir).normalized;
     }
 
-    void Update()
+    void MovePlayer()
     {
         float h = movementInput.x;
         float v = movementInput.y;
@@ -68,5 +71,13 @@ public class PlayerMovement : MonoBehaviour
         }
 
         charController.Move(movementVector * speed * Time.deltaTime);
+    }
+
+    void Update()
+    {
+        if (canMove)
+        {
+            MovePlayer();
+        }
     }
 }
