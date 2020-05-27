@@ -342,6 +342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 178c0a842543e5548a74c8fc08d3da46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  visibilityCheckPoint: {fileID: 6838868224621453881}
   playerState: 0
 --- !u!114 &7645608698683339008
 MonoBehaviour:

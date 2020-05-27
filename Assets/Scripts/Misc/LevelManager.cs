@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelManager : SingletonMonoBehaviour<LevelManager>
 {
-    public Transform playerLocation => PlayerModel.Instance.transform;
+    public Transform playerVisiblePoint => PlayerModel.Instance.visibilityCheckPoint;
     
     // Start is called before the first frame update
     void Start()

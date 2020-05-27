@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerModel : SingletonMonoBehaviour<PlayerModel>
 {
+    public Transform visibilityCheckPoint;
+
     public PlayerMovement playerMovement { get; private set; }
     public QTEManager qteManager { get; private set; }
 

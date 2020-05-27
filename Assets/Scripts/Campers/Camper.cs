@@ -61,7 +61,7 @@ public class Camper : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = avatar.GetComponentInChildren<Animator>();
+        animator = model.GetComponent<Animator>();
         RandomizeModel();
 
         SwitchState(CamperState.Hiding);
@@ -98,8 +98,13 @@ public class Camper : MonoBehaviour
         newModel.transform.localPosition = model.transform.localPosition;
         newModel.transform.localRotation = model.transform.localRotation;
 
-        var newAnimator = newModel.AddComponent<Animator>();
+        var newAnimator = newModel.GetComponent<Animator>();
+        if (newAnimator == null)
+        {
+            newAnimator = newModel.AddComponent<Animator>();
+        }
         newAnimator.runtimeAnimatorController = animator.runtimeAnimatorController;
+        newAnimator.applyRootMotion = false;
 
         model.SetActive(false);
         model = newModel;
@@ -134,7 +139,7 @@ public class Camper : MonoBehaviour
     {
         _isLineToPlayerBlocked = true;
 
-        var playerLoc = LevelManager.Instance.playerLocation;
+        var playerLoc = LevelManager.Instance.playerVisiblePoint;
         var toPlayer = playerLoc.position - visionRoot.position;
 
         if (Physics.Raycast(visionRoot.position, toPlayer.normalized, out var hit))
@@ -150,8 +155,7 @@ public class Camper : MonoBehaviour
     {
         _canSeePlayer = false;
 
-        var playerLoc = LevelManager.Instance.playerLocation;
-
+        var playerLoc = LevelManager.Instance.playerVisiblePoint;
         var toPlayer = playerLoc.position - visionRoot.position;
 
         if (toPlayer.magnitude <= maxVisionRange)
@@ -188,7 +192,7 @@ public class Camper : MonoBehaviour
 
                 if (!_isLineToPlayerBlocked)
                 {
-                    var playerLoc = LevelManager.Instance.playerLocation;
+                    var playerLoc = LevelManager.Instance.playerVisiblePoint;
                     var toPlayer = playerLoc.position - visionRoot.position;
 
                     if (toPlayer.magnitude <= maxDistanceToSenseMonster)
@@ -202,7 +206,7 @@ public class Camper : MonoBehaviour
             case CamperState.Moving:
                 if (_canSeePlayer)
                 {
-                    var toPlayer = LevelManager.Instance.playerLocation.position - transform.position;
+                    var toPlayer = LevelManager.Instance.playerVisiblePoint.position - transform.position;
                     var toDestination = navMeshAgent.destination - transform.position;
 
                     if (Vector3.Angle(toPlayer, toDestination) <= maxVisionAngle)
