@@ -52,6 +52,7 @@ public class QTEManager : MonoBehaviour
 
         QTETimerImage.enabled = true;
         QTETimerImage.fillAmount = 0;
+        Debug.Log(QTETimerImage.enabled);
     }
 
     void OnDisable()
