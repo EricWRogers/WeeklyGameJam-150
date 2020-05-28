@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -12,9 +13,14 @@ public class PlayerModel : SingletonMonoBehaviour<PlayerModel>
     public float maxAttackRadius = 3f;
     public float maxAttackAngle = 30f;
 
+    [SerializeField] [ReadOnly] private int _campersEaten = 0;
+
     public PlayerMovement playerMovement { get; private set; }
     public QTEManager qteManager { get; private set; }
     public GameObject avatar => playerMovement.avatar;
+
+    public int campersEaten => _campersEaten;
+    public event Action<Camper> onCamperEaten;
 
     new void Awake()
     {
@@ -63,8 +69,19 @@ public class PlayerModel : SingletonMonoBehaviour<PlayerModel>
         return false;
     }
 
+    public void OnCamperEaten(Camper camper)
+    {
+        _campersEaten++;
+        onCamperEaten?.Invoke(camper);
+    }
+
     void OnAttack(InputValue inputValue)
     {
+        if (LevelManager.Instance.isGameEnded)
+        {
+            return;
+        }
+
         // TODO (Azee): Play attack animation
 
         var camper = CamperManager.Instance.campers.Find(CanAttackCamper);

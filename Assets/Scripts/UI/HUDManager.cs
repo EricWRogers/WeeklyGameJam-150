@@ -102,5 +102,6 @@ public class HUDManager : SingletonMonoBehaviour<HUDManager>
     {
         _UpdateClockUI(0.0f);
         Debug.Log("GameOver");
+        LevelManager.Instance.PlayGameOverSequence();
     }
 }
