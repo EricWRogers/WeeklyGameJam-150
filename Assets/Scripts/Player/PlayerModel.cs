@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +10,7 @@ public class PlayerModel : SingletonMonoBehaviour<PlayerModel>
 {
     public Transform visibilityCheckPoint;
     public Transform camperCapturePivot;
+    public CinemachineVirtualCameraBase thirdPersonVirtualCamera;
     public Animator animator;
 
     public float maxAttackRadius = 3f;

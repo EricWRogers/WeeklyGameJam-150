@@ -208,8 +208,8 @@ MonoBehaviour:
   m_UpdateMethod: 2
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
-    m_Style: 1
-    m_Time: 2
+    m_Style: 6
+    m_Time: 1
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []
@@ -1063,6 +1063,21 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -2.21
       objectReference: {fileID: 0}
+    - target: {fileID: 1237112136169324630, guid: a7b4c41f67d7a984fafcb26ea57a0355,
+        type: 3}
+      propertyPath: qteVirtualCameras.Array.data[4]
+      value: 
+      objectReference: {fileID: 2965518691598846790}
+    - target: {fileID: 1237112136169324630, guid: a7b4c41f67d7a984fafcb26ea57a0355,
+        type: 3}
+      propertyPath: qteVirtualCameras.Array.data[5]
+      value: 
+      objectReference: {fileID: 2965518691598846790}
+    - target: {fileID: 3683141596007942747, guid: a7b4c41f67d7a984fafcb26ea57a0355,
+        type: 3}
+      propertyPath: thirdPersonVirtualCamera
+      value: 
+      objectReference: {fileID: 4373487822172642140}
     - target: {fileID: 7645608698683339002, guid: a7b4c41f67d7a984fafcb26ea57a0355,
         type: 3}
       propertyPath: m_Name
@@ -1146,6 +1161,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6245200321925946890}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2965518691598846790 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9190944222156084556, guid: a7b4c41f67d7a984fafcb26ea57a0355,
+    type: 3}
+  m_PrefabInstance: {fileID: 6245200321925946890}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &595569096864152627 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6838868224621453881, guid: a7b4c41f67d7a984fafcb26ea57a0355,

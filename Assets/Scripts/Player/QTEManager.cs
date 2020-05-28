@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -26,6 +27,8 @@ public class QTEManager : MonoBehaviour
     public InputKeyUI westKey;
     public InputKeyUI eastKey;
 
+    public List<CinemachineVirtualCameraBase> qteVirtualCameras;
+
     [HideInInspector] public Camper camperInPossession = null;
 
     private float maxQTETimer = 0;
@@ -35,6 +38,9 @@ public class QTEManager : MonoBehaviour
     private bool checkQTETimer = false;
     private bool isEating = false;
 
+    private Randomizer<CinemachineVirtualCameraBase> qteVirtualCameraRandomizer;
+    private CinemachineVirtualCameraBase curVirtualCamera = null;
+
     void Awake()
     {
         QTEBuffer = maxQTEBuffer.GetRandom();
@@ -43,6 +49,11 @@ public class QTEManager : MonoBehaviour
 
     void OnEnable()
     {
+        PlayerModel.Instance.thirdPersonVirtualCamera.enabled = false;
+
+        qteVirtualCameraRandomizer = new Randomizer<CinemachineVirtualCameraBase>(qteVirtualCameras);
+        SwitchToRandomQTEVirtualCamera();
+
         PlayerModel.Instance.animator.SetBool("captured", true);
 
         maxQuickTimeEvents.SelectRandom();
@@ -58,10 +69,19 @@ public class QTEManager : MonoBehaviour
         QTETimerImage.enabled = true;
         QTETimerImage.fillAmount = 0;
         Debug.Log(QTETimerImage.enabled);
+
+        isEating = false;
     }
 
     void OnDisable()
     {
+        if (curVirtualCamera)
+        {
+            curVirtualCamera.enabled = false;
+        }
+
+        PlayerModel.Instance.thirdPersonVirtualCamera.enabled = true;
+
         PlayerModel.Instance.animator.SetBool("captured", false);
 
         canGetNextKey = true;
@@ -75,6 +95,11 @@ public class QTEManager : MonoBehaviour
 
     void Update()
     {
+        if (isEating)
+        {
+            return;
+        }
+
         if (canGetNextKey)
         {
             GetNextKey();
@@ -91,6 +116,17 @@ public class QTEManager : MonoBehaviour
                 Fail();
             }
         }
+    }
+
+    void SwitchToRandomQTEVirtualCamera()
+    {
+        if (curVirtualCamera)
+        {
+            curVirtualCamera.enabled = false;
+        }
+
+        curVirtualCamera = qteVirtualCameraRandomizer.GetRandomItem();
+        curVirtualCamera.enabled = true;
     }
 
     void GetNextKey()
@@ -124,6 +160,8 @@ public class QTEManager : MonoBehaviour
             QTETimerImage.fillAmount = 1;
 
             canGetNextKey = false;
+
+            SwitchToRandomQTEVirtualCamera();
         }
     }
 
