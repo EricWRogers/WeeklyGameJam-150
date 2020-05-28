@@ -33,6 +33,7 @@ public class QTEManager : MonoBehaviour
 
     private bool canGetNextKey = true;
     private bool checkQTETimer = false;
+    private bool isEating = false;
 
     void Awake()
     {
@@ -138,20 +139,28 @@ public class QTEManager : MonoBehaviour
 
     void CheckPass()
     {
+        if (isEating)
+        {
+            return;
+        }
+
         if (currentPasses == maxQuickTimeEvents.selected)
         {
             Debug.Log("Passed!");
 
-            camperInPossession.OnEaten();
-            PlayerModel.Instance.OnCamperEaten(camperInPossession);
-
+            camperInPossession.OnBeingEaten();
             PlayerModel.Instance.animator.SetTrigger("eat");
-
-            PlayerModel.Instance.ChangeState(PlayerModel.PlayerState.Moving);
-            this.enabled = false;
+            isEating = true;
         }
 
         QTETimerImage.fillAmount = 0;
+    }
+
+    public void OnEatingAnimationCompleted()
+    {
+        this.enabled = false;
+        isEating = false;
+        camperInPossession = null;
     }
 
     void OnQuickTimeNorth(InputValue inputValue)

@@ -151,6 +151,11 @@ public class Camper : MonoBehaviour
         MoveToNewHidingSpot();
     }
 
+    public void OnBeingEaten()
+    {
+        animator.SetTrigger("beingEaten");
+    }
+
     public void OnEaten()
     {
         SwitchState(CamperState.Eaten);
@@ -329,6 +334,9 @@ public class Camper : MonoBehaviour
                 break;
             case CamperState.Safe:
                 animator.SetBool("hiding", true);
+                break;
+            case CamperState.Eaten:
+                gameObject.SetActive(false);
                 break;
             default:
                 break;
