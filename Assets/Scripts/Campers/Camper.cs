@@ -281,6 +281,7 @@ public class Camper : MonoBehaviour
             case CamperState.Captured:
                 transform.SetParent(null);
                 navMeshAgent.enabled = true;
+                animator.SetBool("captured", false);
                 break;
             default:
                 break;
@@ -323,7 +324,7 @@ public class Camper : MonoBehaviour
                 transform.localPosition = capturedLocalOffset;
                 transform.localRotation = Quaternion.Euler(capturedLocalRotation);
 
-                // TODO (Azee): Animate the camper
+                animator.SetBool("captured", true);
 
                 break;
             case CamperState.Safe:

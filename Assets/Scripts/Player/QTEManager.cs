@@ -42,6 +42,8 @@ public class QTEManager : MonoBehaviour
 
     void OnEnable()
     {
+        PlayerModel.Instance.animator.SetBool("captured", true);
+
         maxQuickTimeEvents.SelectRandom();
 
         canGetNextKey = true;
@@ -59,6 +61,8 @@ public class QTEManager : MonoBehaviour
 
     void OnDisable()
     {
+        PlayerModel.Instance.animator.SetBool("captured", false);
+
         canGetNextKey = true;
 
         northKey.gameObject.SetActive(false);
@@ -140,6 +144,8 @@ public class QTEManager : MonoBehaviour
 
             camperInPossession.OnEaten();
             PlayerModel.Instance.OnCamperEaten(camperInPossession);
+
+            PlayerModel.Instance.animator.SetTrigger("eat");
 
             PlayerModel.Instance.ChangeState(PlayerModel.PlayerState.Moving);
             this.enabled = false;
