@@ -1,9 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class LevelManager : SingletonMonoBehaviour<LevelManager>
 {
+    public readonly string[] ranks = new[]
+    {
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+    };
+
+    public readonly string perfectRank = "S";
+
+    public Volume daylightVolume;
+
     public int campersRemaining =>
         Mathf.Max(
             CamperManager.Instance.campersCount - PlayerModel.Instance.campersEaten -
@@ -30,6 +44,7 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
     // Update is called once per frame
     void Update()
     {
+        daylightVolume.weight = 1.0f - HUDManager.Instance.timeLeftNormalized;
     }
 
     public void PlayGameOverSequence()
@@ -49,6 +64,12 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
 
     public string GetRank()
     {
-        return "C";
+        if (PlayerModel.Instance.campersEaten == CamperManager.Instance.campersCount)
+        {
+            return perfectRank;
+        }
+
+        var rankIndex = (PlayerModel.Instance.campersEaten * ranks.Length) / CamperManager.Instance.campersCount;
+        return ranks[Mathf.Clamp(rankIndex, 0, ranks.Length - 1)];
     }
 }

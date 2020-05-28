@@ -7,8 +7,9 @@ public class WinPanel : MonoBehaviour
 {
     void OnEnable()
     {
-        string winText = "Rank: " + LevelManager.Instance.GetRank(); 
-        winText += "\n\nYou Monster! You ate " + PlayerModel.Instance.campersEaten + " campers!";
+        string winText = "Rank: " + LevelManager.Instance.GetRank();
+        winText += "\n\nYou Monster! You ate " + PlayerModel.Instance.campersEaten +
+                   $" camper{(PlayerModel.Instance.campersEaten == 1 ? "" : "s")}!";
 
         GetComponent<TMP_Text>().text = winText;
     }

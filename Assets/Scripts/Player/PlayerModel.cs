@@ -133,4 +133,12 @@ public class PlayerModel : SingletonMonoBehaviour<PlayerModel>
 
         playerState = state;
     }
+
+    void OnPauseToggle(InputValue inputValue)
+    {
+        if (playerState == PlayerState.Moving)
+        {
+            HUDManager.Instance.PauseToggle();
+        }
+    }
 }

@@ -19,11 +19,16 @@ public class HUDManager : SingletonMonoBehaviour<HUDManager>
     public string ExcapeString = "Escaped";
     public TMP_Text ExcapeText = null;
 
+    public MenuPage startingInfo;
+    public float startingInfoDuration = 3f;
+
     private bool CountingDown = false;
     private float OriginalTime = 600.0f;
     private float OriginalTimeBarWidth = 400.0f;
 
     public MenuPage winPanel;
+
+    public float timeLeftNormalized => HelperUtilities.Remap(GameLengthSec, 0, OriginalTime, 0, 1.0f);
 
     new void Awake()
     {
@@ -34,6 +39,11 @@ public class HUDManager : SingletonMonoBehaviour<HUDManager>
 
     void Start()
     {
+        startingInfo.Show();
+        this.WaitAndExecute(() =>
+        {
+            startingInfo.Hide();
+        }, startingInfoDuration);
         StartCountDown();
     }
 
@@ -51,13 +61,14 @@ public class HUDManager : SingletonMonoBehaviour<HUDManager>
         CountingDown = true;
     }
 
-    void OnPauseToggle(InputValue inputValue)
+    public void PauseToggle()
     {
         if (Time.timeScale == 0.0f)
             ResumeGame();
         else
             PauseGame();
     }
+
     public void PauseGame()
     {
         if(PauseMenu != null)
