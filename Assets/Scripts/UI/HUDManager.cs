@@ -160,6 +160,9 @@ public class HUDManager : SingletonMonoBehaviour<HUDManager>
     public void ShowEndScreen(string reason)
     {
         Time.timeScale = 0f;
+        HelperUtilities.UpdateCursorLock(false);
+
+        winPanel.reason = reason;
         winPanelMenuPage.Show();
     }
 }

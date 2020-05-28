@@ -22,6 +22,7 @@ public class QTEManager : MonoBehaviour
     public float QTETimer;
     public RangeInt maxQuickTimeEvents;
 
+    public GameObject QTETimerRoot;
     public UnityEngine.UI.Image QTETimerImage;
     public InputKeyUI northKey;
     public InputKeyUI southKey;
@@ -67,9 +68,8 @@ public class QTEManager : MonoBehaviour
 
         currentPasses = 0;
 
-        QTETimerImage.enabled = true;
+        QTETimerRoot.SetActive(true);
         QTETimerImage.fillAmount = 0;
-        Debug.Log(QTETimerImage.enabled);
 
         isEating = false;
     }
@@ -91,11 +91,13 @@ public class QTEManager : MonoBehaviour
         southKey.gameObject.SetActive(false);
         westKey.gameObject.SetActive(false);
         eastKey.gameObject.SetActive(false);
-        QTETimerImage.enabled = false;
+        QTETimerRoot.SetActive(false);
     }
 
     void Update()
     {
+        QTETimerRoot.SetActive(QTETimerImage.fillAmount > 0);
+
         if (isEating)
         {
             return;
