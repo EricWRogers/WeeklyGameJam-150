@@ -12,6 +12,7 @@ public enum CamperState
     Hiding,
     Moving,
     Captured,
+    Eaten,
     Safe,
 }
 
@@ -36,6 +37,10 @@ public class Camper : MonoBehaviour
     public RangeFloat maxHideDurationRange;
     public float maxDistanceToSenseMonster = 5;
 
+    [Header("Captured Params")]
+    public Vector3 capturedLocalOffset;
+    public Vector3 capturedLocalRotation;
+
     [Header("Dev Tools")] [SerializeField] [Button("Move to new hiding spot", "MoveToNewHidingSpot")]
     private bool _btnMoveToNewHidingSpot;
 
@@ -52,6 +57,7 @@ public class Camper : MonoBehaviour
 
     public CamperState curState => _curState;
     public CamperState prevState => _prevState;
+    public bool isLineToPlayerBlocked => _isLineToPlayerBlocked;
 
     void Awake()
     {
@@ -133,6 +139,21 @@ public class Camper : MonoBehaviour
     HidingSpot FindNewHidingSpot()
     {
         return CamperManager.Instance.hidingSpotsRandomizer.GetRandomItem();
+    }
+
+    public void OnCaptured()
+    {
+        SwitchState(CamperState.Captured);
+    }
+
+    public void OnReleased()
+    {
+        MoveToNewHidingSpot();
+    }
+
+    public void OnEaten()
+    {
+        SwitchState(CamperState.Eaten);
     }
 
     private void ComputeIsLineToPlayerBlocked()
@@ -252,6 +273,10 @@ public class Camper : MonoBehaviour
             case CamperState.Moving:
                 animator.SetBool("running", false);
                 break;
+            case CamperState.Captured:
+                transform.SetParent(null);
+                navMeshAgent.enabled = true;
+                break;
             default:
                 break;
         }
@@ -285,6 +310,16 @@ public class Camper : MonoBehaviour
                     data.GetOrDefault("stateOnReachedTarget", CamperState.Hiding);
 
                 navMeshAgent.SetDestination(data.GetOrDefault("target", navMeshAgent.transform.position));
+                break;
+            case CamperState.Captured:
+                navMeshAgent.enabled = false;
+
+                transform.SetParent(PlayerModel.Instance.camperCapturePivot);
+                transform.localPosition = capturedLocalOffset;
+                transform.localRotation = Quaternion.Euler(capturedLocalRotation);
+
+                // TODO (Azee): Animate the camper
+
                 break;
             case CamperState.Safe:
                 animator.SetBool("hiding", true);

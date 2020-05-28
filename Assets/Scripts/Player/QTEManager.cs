@@ -26,6 +26,8 @@ public class QTEManager : MonoBehaviour
     public InputKeyUI westKey;
     public InputKeyUI eastKey;
 
+    [HideInInspector] public Camper camperInPossession = null;
+
     private float maxQTETimer = 0;
     private int currentPasses = 0;
 
@@ -123,6 +125,9 @@ public class QTEManager : MonoBehaviour
     void Fail()
     {
         Debug.Log("Fail");
+
+        camperInPossession.OnReleased();
+
         PlayerModel.Instance.ChangeState(PlayerModel.PlayerState.Moving);
         this.enabled = false;
     }
@@ -132,6 +137,9 @@ public class QTEManager : MonoBehaviour
         if (currentPasses == maxQuickTimeEvents.selected)
         {
             Debug.Log("Passed!");
+
+            camperInPossession.OnEaten();
+
             PlayerModel.Instance.ChangeState(PlayerModel.PlayerState.Moving);
             this.enabled = false;
         }

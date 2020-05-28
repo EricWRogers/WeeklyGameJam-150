@@ -284,6 +284,13 @@ public static class HelperExtensions
         return new Vector3(self.x * other.x, self.y * other.y, self.z * other.z);
     }
 
+    public static Vector3 GetYLess(this Vector3 self)
+    {
+        var res = self;
+        res.y = 0;
+        return res;
+    }
+
     #endregion
 
     #region Camera

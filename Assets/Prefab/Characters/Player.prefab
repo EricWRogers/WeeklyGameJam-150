@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1782696939439242345
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7640508978382698536}
+  m_Layer: 0
+  m_Name: VisibilityCheckPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7640508978382698536
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782696939439242345}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.024, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8141446497582226516}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2776980476332130107
 GameObject:
   m_ObjectHideFlags: 0
@@ -40,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8141446497582226516}
   m_Layer: 0
-  m_Name: CameraHelpers
+  m_Name: Helpers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,11 +83,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2961343438913637698}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6838868224621453881}
+  - {fileID: 7640508978382698536}
   m_Father: {fileID: 7645608698683339006}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -274,6 +305,36 @@ MonoBehaviour:
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &5847151647047725106
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 924715402381340353}
+  m_Layer: 0
+  m_Name: CamperCapturePivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &924715402381340353
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5847151647047725106}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.84}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4513986900489651610}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7645608698683339002
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,7 +403,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 178c0a842543e5548a74c8fc08d3da46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visibilityCheckPoint: {fileID: 6838868224621453881}
+  visibilityCheckPoint: {fileID: 7640508978382698536}
+  camperCapturePivot: {fileID: 924715402381340353}
+  maxAttackRadius: 4
+  maxAttackAngle: 30
   playerState: 0
 --- !u!114 &7645608698683339008
 MonoBehaviour:
@@ -391,6 +455,7 @@ MonoBehaviour:
   southKey: {fileID: 7044270672994606880}
   westKey: {fileID: 819550733616543520}
   eastKey: {fileID: 4840252153859596545}
+  camperInPossession: {fileID: 0}
 --- !u!114 &-8668021825920797966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,6 +487,37 @@ MonoBehaviour:
   m_DefaultActionMap: Player Controls
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!1 &8263603322466204657
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4513986900489651610}
+  m_Layer: 0
+  m_Name: Helpers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4513986900489651610
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8263603322466204657}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 924715402381340353}
+  m_Father: {fileID: 6353115671106434407}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8386551784887484212
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,6 +547,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 2.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4513986900489651610}
   - {fileID: 3497072642225774857}
   m_Father: {fileID: 7645608698683339006}
   m_RootOrder: 0
@@ -659,7 +756,7 @@ PrefabInstance:
     - target: {fileID: 7443733562166813486, guid: b0bb73e3b4d3b5144b5bee2224030e6d,
         type: 3}
       propertyPath: keyboardText
-      value: S
+      value: E
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0bb73e3b4d3b5144b5bee2224030e6d, type: 3}
@@ -838,7 +935,7 @@ PrefabInstance:
     - target: {fileID: 7443733562166813486, guid: b0bb73e3b4d3b5144b5bee2224030e6d,
         type: 3}
       propertyPath: keyboardText
-      value: W
+      value: Q
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0bb73e3b4d3b5144b5bee2224030e6d, type: 3}
@@ -1017,7 +1114,7 @@ PrefabInstance:
     - target: {fileID: 7443733562166813486, guid: b0bb73e3b4d3b5144b5bee2224030e6d,
         type: 3}
       propertyPath: keyboardText
-      value: D
+      value: F
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0bb73e3b4d3b5144b5bee2224030e6d, type: 3}
@@ -1089,7 +1186,7 @@ PrefabInstance:
     - target: {fileID: 7812189084529883697, guid: 0c995b1d5f7553f42a491424c78ca9aa,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7812189084529883697, guid: 0c995b1d5f7553f42a491424c78ca9aa,
         type: 3}
@@ -1271,7 +1368,7 @@ PrefabInstance:
     - target: {fileID: 7443733562166813486, guid: b0bb73e3b4d3b5144b5bee2224030e6d,
         type: 3}
       propertyPath: keyboardText
-      value: A
+      value: R
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0bb73e3b4d3b5144b5bee2224030e6d, type: 3}
