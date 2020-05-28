@@ -199,6 +199,11 @@ public class Camper : MonoBehaviour
         switch (curState)
         {
             case CamperState.Hiding:
+                if (LevelManager.Instance.isGameEnded)
+                {
+                    return;
+                }
+
                 if (curStateData.timeSinceStateActive >= curStateData.metaData.GetOrDefault("timeout", 0f))
                 {
                     MoveToNewHidingSpot();

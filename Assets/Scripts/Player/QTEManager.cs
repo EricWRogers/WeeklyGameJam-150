@@ -139,6 +139,7 @@ public class QTEManager : MonoBehaviour
             Debug.Log("Passed!");
 
             camperInPossession.OnEaten();
+            PlayerModel.Instance.OnCamperEaten(camperInPossession);
 
             PlayerModel.Instance.ChangeState(PlayerModel.PlayerState.Moving);
             this.enabled = false;

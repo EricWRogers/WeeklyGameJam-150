@@ -74,6 +74,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (LevelManager.Instance.isGameEnded)
+        {
+            return;
+        }
+
         if (canMove)
         {
             MovePlayer();
