@@ -16,6 +16,7 @@ public class QTEManager : MonoBehaviour
     }
 
     public QTEOptions currentKey;
+    public float initialQTEBuffer = 1f;
     public RangeFloat maxQTEBuffer;
     public float QTEBuffer = 0;
     public float QTETimer;
@@ -49,7 +50,7 @@ public class QTEManager : MonoBehaviour
 
     void OnEnable()
     {
-        PlayerModel.Instance.thirdPersonVirtualCamera.enabled = false;
+        // PlayerModel.Instance.thirdPersonVirtualCamera.enabled = false;
 
         qteVirtualCameraRandomizer = new Randomizer<CinemachineVirtualCameraBase>(qteVirtualCameras);
         SwitchToRandomQTEVirtualCamera();
@@ -61,7 +62,7 @@ public class QTEManager : MonoBehaviour
         canGetNextKey = true;
         checkQTETimer = false;
 
-        QTEBuffer = maxQTEBuffer.GetRandom();
+        QTEBuffer = initialQTEBuffer;
         QTETimer = maxQTETimer;
 
         currentPasses = 0;
@@ -80,7 +81,7 @@ public class QTEManager : MonoBehaviour
             curVirtualCamera.enabled = false;
         }
 
-        PlayerModel.Instance.thirdPersonVirtualCamera.enabled = true;
+        // PlayerModel.Instance.thirdPersonVirtualCamera.enabled = true;
 
         PlayerModel.Instance.animator.SetBool("captured", false);
 
@@ -160,8 +161,6 @@ public class QTEManager : MonoBehaviour
             QTETimerImage.fillAmount = 1;
 
             canGetNextKey = false;
-
-            SwitchToRandomQTEVirtualCamera();
         }
     }
 
@@ -216,6 +215,8 @@ public class QTEManager : MonoBehaviour
 
                 northKey.gameObject.SetActive(false);
                 Debug.Log("Good!");
+
+                SwitchToRandomQTEVirtualCamera();
             }
             else
             {
@@ -239,6 +240,8 @@ public class QTEManager : MonoBehaviour
 
                 southKey.gameObject.SetActive(false);
                 Debug.Log("Good!");
+
+                SwitchToRandomQTEVirtualCamera();
             }
             else
             {
@@ -262,6 +265,8 @@ public class QTEManager : MonoBehaviour
 
                 westKey.gameObject.SetActive(false);
                 Debug.Log("Good!");
+
+                SwitchToRandomQTEVirtualCamera();
             }
             else
             {
@@ -285,6 +290,8 @@ public class QTEManager : MonoBehaviour
 
                 eastKey.gameObject.SetActive(false);
                 Debug.Log("Good!");
+
+                SwitchToRandomQTEVirtualCamera();
             }
             else
             {

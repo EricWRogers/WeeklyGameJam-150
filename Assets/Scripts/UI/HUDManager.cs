@@ -16,12 +16,14 @@ public class HUDManager : SingletonMonoBehaviour<HUDManager>
     public TMP_Text EatenText = null;
     public string LeftString = "Left";
     public TMP_Text LeftText = null;
-    public string ExcapeString = "Excape";
+    public string ExcapeString = "Escaped";
     public TMP_Text ExcapeText = null;
 
     private bool CountingDown = false;
     private float OriginalTime = 600.0f;
     private float OriginalTimeBarWidth = 400.0f;
+
+    public MenuPage winPanel;
 
     new void Awake()
     {
@@ -123,7 +125,7 @@ public class HUDManager : SingletonMonoBehaviour<HUDManager>
         
         EatenText.text = EatenString + " : " + PlayerModel.Instance.campersEaten;
         LeftText.text = LeftString + " : " + LevelManager.Instance.campersRemaining;
-        ExcapeText.text = ExcapeString + " : " + (CamperManager.Instance.campersCount - PlayerModel.Instance.campersEaten - LevelManager.Instance.campersRemaining);
+        ExcapeText.text = ExcapeString + " : " + (CamperManager.Instance.campersSafe);
     }
     private void _UpdateTimeBar(float sec,float maxTime)
     {
@@ -132,7 +134,7 @@ public class HUDManager : SingletonMonoBehaviour<HUDManager>
 
         float width = (sec * OriginalTimeBarWidth) / OriginalTime;
 
-        Debug.Log(width);
+        // Debug.Log(width);
 
         TimeBar.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width);
     }
@@ -141,5 +143,11 @@ public class HUDManager : SingletonMonoBehaviour<HUDManager>
         _UpdateClockUI(0.0f,(6 * 3600));
         Debug.Log("GameOver");
         LevelManager.Instance.PlayGameOverSequence();
+    }
+
+    public void ShowEndScreen()
+    {
+        Time.timeScale = 0f;
+        winPanel.Show();
     }
 }

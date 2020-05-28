@@ -7,6 +7,14 @@ public class WinPanel : MonoBehaviour
 {
     void OnEnable()
     {
-        GetComponent<TMP_Text>().text = "You Monster you ate " + PlayerModel.Instance.campersEaten + " campers!";
+        string winText = "Rank: " + LevelManager.Instance.GetRank(); 
+        winText += "\n\nYou Monster! You ate " + PlayerModel.Instance.campersEaten + " campers!";
+
+        GetComponent<TMP_Text>().text = winText;
+    }
+
+    public void MainMenu()
+    {
+        GameManager.Instance.GoToMainMenu();
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -18,11 +19,17 @@ public class CamperManager : SingletonMonoBehaviour<CamperManager>
     public RangeInt campersPerTargetRunRange;
     public float minTargetBaseToPlayerAngleToRun = 30f;
 
+    [Header("Debug")]
+    [SerializeField] [ReadOnly] private int _campersSafe = 0;
+
     public List<Camper> campers { get; } = new List<Camper>();
     public Randomizer<HidingSpot> hidingSpotsRandomizer { get; private set; }
     public Randomizer<GameObject> camperModelPrefabsRandomizer { get; private set; }
 
     private float timeSinceLastRunToTargetBase = 0;
+
+    public int campersSafe => _campersSafe;
+    public event Action<Camper> onCamperSafe;
 
     new void Awake()
     {
@@ -111,5 +118,11 @@ public class CamperManager : SingletonMonoBehaviour<CamperManager>
 
             campers.Add(camper);
         }
+    }
+
+    public void OnCamperSafe(Camper camper)
+    {
+        _campersSafe++;
+        onCamperSafe?.Invoke(camper);
     }
 }
