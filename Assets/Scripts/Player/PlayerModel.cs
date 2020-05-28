@@ -30,6 +30,20 @@ public class PlayerModel : SingletonMonoBehaviour<PlayerModel>
         
         qteManager = GetComponent<QTEManager>();
         qteManager.enabled = false;
+
+        animator.GetComponent<AnimatorStateHelper>().onStateExit += (stateIdentifier, animator1, info, index) =>
+        {
+            if (stateIdentifier.Equals("devour"))
+            {
+                if (qteManager.enabled)
+                {
+                    OnCamperEaten(qteManager.camperInPossession);
+                    ChangeState(PlayerModel.PlayerState.Moving);
+
+                    qteManager.OnEatingAnimationCompleted();
+                }
+            }
+        };
     }
 
     public enum PlayerState
