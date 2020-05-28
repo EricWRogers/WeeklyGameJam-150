@@ -126,7 +126,7 @@ MonoBehaviour:
     max: 20
     selectedDebug: 
   maxDistanceToSenseMonster: 5
-  capturedLocalOffset: {x: 0, y: 0, z: 0}
+  capturedLocalOffset: {x: -0.012, y: -0.302, z: 0.032}
   capturedLocalRotation: {x: 0, y: 180, z: 0}
   _btnMoveToNewHidingSpot: 0
   _canSeePlayer: 0

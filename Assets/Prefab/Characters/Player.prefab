@@ -405,7 +405,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visibilityCheckPoint: {fileID: 7640508978382698536}
   camperCapturePivot: {fileID: 3720487312059076501}
-  animator: {fileID: 6774006251376217203}
+  animator: {fileID: 7404423542359958476}
   maxAttackRadius: 4
   maxAttackAngle: 30
   _campersEaten: 0
@@ -1151,6 +1151,11 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: b2f287fa4811e73409628a1d754a8f8b, type: 2}
+    - target: {fileID: -6057140222963153312, guid: 534249d3d376b3041a121c45d9ad8a88,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 534249d3d376b3041a121c45d9ad8a88,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1216,6 +1221,12 @@ PrefabInstance:
 --- !u!4 &3720487312059076501 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9119982261218552377, guid: 534249d3d376b3041a121c45d9ad8a88,
+    type: 3}
+  m_PrefabInstance: {fileID: 5562364404062397868}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7404423542359958476 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: -6057140222963153312, guid: 534249d3d376b3041a121c45d9ad8a88,
     type: 3}
   m_PrefabInstance: {fileID: 5562364404062397868}
   m_PrefabAsset: {fileID: 0}
@@ -1299,12 +1310,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c995b1d5f7553f42a491424c78ca9aa, type: 3}
---- !u!95 &6774006251376217203 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 207301189128345419, guid: 0c995b1d5f7553f42a491424c78ca9aa,
-    type: 3}
-  m_PrefabInstance: {fileID: 6693019331016317752}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3497072642225774857 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7812189084529883697, guid: 0c995b1d5f7553f42a491424c78ca9aa,
