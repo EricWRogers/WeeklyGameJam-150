@@ -479,7 +479,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameLengthSec: 30
   TimeTillDawn: {fileID: 7691143434175358784}
-  PauseMenu: {fileID: 0}
+  PauseMenu: {fileID: 3884654677490508848}
   TimeBar: {fileID: 982390269}
   EatenString: Eaten
   EatenText: {fileID: 6596756878880007076}
@@ -489,7 +489,8 @@ MonoBehaviour:
   ExcapeText: {fileID: 6596756880305222774}
   startingInfo: {fileID: 8471100496663472064}
   startingInfoDuration: 3
-  winPanel: {fileID: 31160307950637618}
+  winPanel: {fileID: 915162858}
+  winPanelMenuPage: {fileID: 31160307950637618}
 --- !u!1 &3345002735336288448
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,6 +972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b92c5ac94df10e2d80872d8bff0601b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reason: 
 --- !u!1 &8662596832654985503
 GameObject:
   m_ObjectHideFlags: 0
@@ -1815,22 +1817,22 @@ PrefabInstance:
     - target: {fileID: 8495958430099590050, guid: ee32031d28ad0ee48971e24ebf22ea95,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 42
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 8495958430099590050, guid: ee32031d28ad0ee48971e24ebf22ea95,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 8
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8495958430099590050, guid: ee32031d28ad0ee48971e24ebf22ea95,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 8
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8495958430099590050, guid: ee32031d28ad0ee48971e24ebf22ea95,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8495958430099590050, guid: ee32031d28ad0ee48971e24ebf22ea95,
         type: 3}
@@ -1855,10 +1857,14 @@ PrefabInstance:
     - target: {fileID: 8495958430099590050, guid: ee32031d28ad0ee48971e24ebf22ea95,
         type: 3}
       propertyPath: m_text
-      value: 'Rank: C
+      value: 'Daylight has struck!
 
 
-        You Monster! You ate 13 Campers!!'
+        Rank: C
+
+
+        You Monster! You ate
+        13 Campers!!'
       objectReference: {fileID: 0}
     - target: {fileID: 8495958430099590050, guid: ee32031d28ad0ee48971e24ebf22ea95,
         type: 3}
@@ -1928,12 +1934,12 @@ PrefabInstance:
     - target: {fileID: 8495958430099590051, guid: ee32031d28ad0ee48971e24ebf22ea95,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 495.5
+      value: 489.5
       objectReference: {fileID: 0}
     - target: {fileID: 8495958430099590051, guid: ee32031d28ad0ee48971e24ebf22ea95,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -144
+      value: -170.75
       objectReference: {fileID: 0}
     - target: {fileID: 8495958430099590051, guid: ee32031d28ad0ee48971e24ebf22ea95,
         type: 3}
@@ -1943,7 +1949,7 @@ PrefabInstance:
     - target: {fileID: 8495958430099590051, guid: ee32031d28ad0ee48971e24ebf22ea95,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 150
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 8495958430099590051, guid: ee32031d28ad0ee48971e24ebf22ea95,
         type: 3}
@@ -2955,12 +2961,12 @@ PrefabInstance:
     - target: {fileID: 5181642552075168666, guid: a8775ca724de57b3aad97e89dd3dc56a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 495.5
+      value: 489.5
       objectReference: {fileID: 0}
     - target: {fileID: 5181642552075168666, guid: a8775ca724de57b3aad97e89dd3dc56a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -387
+      value: -417.25
       objectReference: {fileID: 0}
     - target: {fileID: 5181642552075168666, guid: a8775ca724de57b3aad97e89dd3dc56a,
         type: 3}

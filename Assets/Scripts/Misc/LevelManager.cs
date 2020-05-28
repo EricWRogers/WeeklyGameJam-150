@@ -47,18 +47,18 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
         daylightVolume.weight = 1.0f - HUDManager.Instance.timeLeftNormalized;
     }
 
-    public void PlayGameOverSequence()
+    public void PlayGameOverSequence(string reason)
     {
         isGameEnded = true;
 
-        HUDManager.Instance.ShowEndScreen();
+        HUDManager.Instance.ShowEndScreen(reason);
     }
 
     void OnCampersRemainingChanged()
     {
         if (campersRemaining <= 0)
         {
-            PlayGameOverSequence();
+            PlayGameOverSequence("No more campers available to hunt!");
         }
     }
 

@@ -5,9 +5,12 @@ using TMPro;
 
 public class WinPanel : MonoBehaviour
 {
+    [HideInInspector] public string reason = "";
+
     void OnEnable()
     {
-        string winText = "Rank: " + LevelManager.Instance.GetRank();
+        string winText = reason; 
+        winText += "\n\nRank: " + LevelManager.Instance.GetRank();
         winText += "\n\nYou Monster! You ate " + PlayerModel.Instance.campersEaten +
                    $" camper{(PlayerModel.Instance.campersEaten == 1 ? "" : "s")}!";
 

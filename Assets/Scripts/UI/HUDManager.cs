@@ -26,7 +26,8 @@ public class HUDManager : SingletonMonoBehaviour<HUDManager>
     private float OriginalTime = 600.0f;
     private float OriginalTimeBarWidth = 400.0f;
 
-    public MenuPage winPanel;
+    public WinPanel winPanel;
+    public MenuPage winPanelMenuPage;
 
     public float timeLeftNormalized => HelperUtilities.Remap(GameLengthSec, 0, OriginalTime, 0, 1.0f);
 
@@ -153,12 +154,12 @@ public class HUDManager : SingletonMonoBehaviour<HUDManager>
     {
         _UpdateClockUI(0.0f,(6 * 3600));
         Debug.Log("GameOver");
-        LevelManager.Instance.PlayGameOverSequence();
+        LevelManager.Instance.PlayGameOverSequence("Daylight has struck!");
     }
 
-    public void ShowEndScreen()
+    public void ShowEndScreen(string reason)
     {
         Time.timeScale = 0f;
-        winPanel.Show();
+        winPanelMenuPage.Show();
     }
 }
