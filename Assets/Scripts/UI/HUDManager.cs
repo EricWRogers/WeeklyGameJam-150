@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class HUDManager : SingletonMonoBehaviour<HUDManager>
@@ -38,10 +39,19 @@ public class HUDManager : SingletonMonoBehaviour<HUDManager>
     {
         CountingDown = true;
     }
+
+    void OnPauseToggle(InputValue inputValue)
+    {
+        if (Time.timeScale == 0.0f)
+            ResumeGame();
+        else
+            PauseGame();
+    }
     public void PauseGame()
     {
         if(PauseMenu != null)
         {
+            HelperUtilities.UpdateCursorLock(false);
             PauseMenu.SetActive(true);
             Time.timeScale = 0.0f;
         }
@@ -50,13 +60,14 @@ public class HUDManager : SingletonMonoBehaviour<HUDManager>
     {
         if (PauseMenu != null)
         {
+            HelperUtilities.UpdateCursorLock(true);
             PauseMenu.SetActive(false);
             Time.timeScale = 1.0f;
         }
     }
     public void GoToMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        GameManager.Instance.GoToMainMenu();
     }
     private float _UpdateCountDown(float sec, float dt)
     {
