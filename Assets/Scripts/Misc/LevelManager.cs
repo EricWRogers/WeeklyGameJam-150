@@ -16,6 +16,7 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
 
     public readonly string perfectRank = "S";
 
+    public AudioClip startClip;
     public Volume daylightVolume;
 
     public int campersRemaining =>
@@ -37,6 +38,8 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
     // Start is called before the first frame update
     void Start()
     {
+        SoundEffectsManager.Instance.Play(startClip);
+
         PlayerModel.Instance.onCamperEaten += camper => { OnCampersRemainingChanged(); };
         CamperManager.Instance.onCamperSafe += camper => { OnCampersRemainingChanged(); };
     }
@@ -70,6 +73,7 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
         }
 
         var rankIndex = (PlayerModel.Instance.campersEaten * ranks.Length) / CamperManager.Instance.campersCount;
+        rankIndex = ranks.Length - rankIndex;
         return ranks[Mathf.Clamp(rankIndex, 0, ranks.Length - 1)];
     }
 }

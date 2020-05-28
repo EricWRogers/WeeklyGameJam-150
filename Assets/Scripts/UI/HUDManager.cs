@@ -165,4 +165,9 @@ public class HUDManager : SingletonMonoBehaviour<HUDManager>
         winPanel.reason = reason;
         winPanelMenuPage.Show();
     }
+
+    public void PlayAgain()
+    {
+        GameManager.Instance.RestartCurrentScene();
+    }
 }

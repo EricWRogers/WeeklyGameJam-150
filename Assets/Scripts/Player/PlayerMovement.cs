@@ -62,11 +62,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (!charController.isGrounded)
         {
-            movementVector.y -= gravity;
+            movementVector.y -= gravity * Time.deltaTime;
         }
         else
         {
-            movementVector.y -= minimumGravity;
+            movementVector.y -= minimumGravity * Time.deltaTime;
         }
 
         charController.Move(movementVector * speed * Time.deltaTime);

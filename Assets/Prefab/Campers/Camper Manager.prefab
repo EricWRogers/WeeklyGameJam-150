@@ -48,6 +48,12 @@ MonoBehaviour:
   hidingSpotsContainer: {fileID: 0}
   camperModelPrefabs: []
   campersCount: 6
+  noiseHintIntervalRange:
+    min: 5
+    max: 15
+    selectedDebug: 
+  noiseClip: {fileID: 8300000, guid: ce3b9ca1f91b2b7448b47edafef5d3d3, type: 3}
+  runningClip: {fileID: 8300000, guid: 6db40b577536ac6428442496b3e54139, type: 3}
   initialRunToTargetBaseDelayRange:
     min: 10
     max: 15
@@ -61,3 +67,4 @@ MonoBehaviour:
     max: 1
     selectedDebug: 
   minTargetBaseToPlayerAngleToRun: 30
+  _campersSafe: 0

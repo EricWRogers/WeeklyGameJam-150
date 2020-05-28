@@ -13,6 +13,11 @@ public class CamperManager : SingletonMonoBehaviour<CamperManager>
 
     public int campersCount = 6;
 
+    public RangeFloat noiseHintIntervalRange;
+    public AudioClip noiseClip;
+
+    public AudioClip runningClip;
+
     [Header("Run to TargetBase Stats")]
     public RangeFloat initialRunToTargetBaseDelayRange;
     public RangeFloat runToTargetBaseIntervalRange;
@@ -27,6 +32,7 @@ public class CamperManager : SingletonMonoBehaviour<CamperManager>
     public Randomizer<GameObject> camperModelPrefabsRandomizer { get; private set; }
 
     private float timeSinceLastRunToTargetBase = 0;
+    private float timeSinceLastNoiseHint = 0;
 
     public int campersSafe => _campersSafe;
     public event Action<Camper> onCamperSafe;
@@ -50,12 +56,14 @@ public class CamperManager : SingletonMonoBehaviour<CamperManager>
     void Start()
     {
         initialRunToTargetBaseDelayRange.SelectRandom();
+        noiseHintIntervalRange.SelectRandom();
     }
 
     // Update is called once per frame
     void Update()
     {
         timeSinceLastRunToTargetBase += Time.deltaTime;
+        timeSinceLastNoiseHint += Time.deltaTime;
 
         var curRunToTargetBaseDelayRange = runToTargetBaseIntervalRange.selected.HasValue
             ? runToTargetBaseIntervalRange
@@ -104,6 +112,16 @@ public class CamperManager : SingletonMonoBehaviour<CamperManager>
                 {
                     camper.RunToTargetBase();
                 }
+            }
+        }
+
+        if (LevelManager.Instance.campersRemaining > 0)
+        {
+            if (timeSinceLastNoiseHint > noiseHintIntervalRange.selected)
+            {
+                noiseHintIntervalRange.SelectRandom();
+
+                SoundEffectsManager.Instance.Play(noiseClip);
             }
         }
     }

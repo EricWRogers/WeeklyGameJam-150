@@ -334,6 +334,7 @@ public class Camper : MonoBehaviour
                 break;
             case CamperState.Safe:
                 animator.SetBool("hiding", true);
+                CamperManager.Instance.OnCamperSafe(this);
                 break;
             case CamperState.Eaten:
                 gameObject.SetActive(false);

@@ -29,6 +29,10 @@ public class QTEManager : MonoBehaviour
     public InputKeyUI westKey;
     public InputKeyUI eastKey;
 
+    public AudioClip winClip;
+    public AudioClip loseClip;
+    public AudioClip eatClip;
+
     public List<CinemachineVirtualCameraBase> qteVirtualCameras;
 
     [HideInInspector] public Camper camperInPossession = null;
@@ -169,6 +173,7 @@ public class QTEManager : MonoBehaviour
     void Fail()
     {
         Debug.Log("Fail");
+        SoundEffectsManager.Instance.Play(loseClip);
 
         camperInPossession.OnReleased();
 
@@ -186,6 +191,7 @@ public class QTEManager : MonoBehaviour
         if (currentPasses == maxQuickTimeEvents.selected)
         {
             Debug.Log("Passed!");
+            SoundEffectsManager.Instance.Play(eatClip);
 
             camperInPossession.OnBeingEaten();
             PlayerModel.Instance.animator.SetTrigger("eat");
@@ -219,6 +225,7 @@ public class QTEManager : MonoBehaviour
                 Debug.Log("Good!");
 
                 SwitchToRandomQTEVirtualCamera();
+                SoundEffectsManager.Instance.Play(winClip);
             }
             else
             {
@@ -244,6 +251,7 @@ public class QTEManager : MonoBehaviour
                 Debug.Log("Good!");
 
                 SwitchToRandomQTEVirtualCamera();
+                SoundEffectsManager.Instance.Play(winClip);
             }
             else
             {
@@ -269,6 +277,7 @@ public class QTEManager : MonoBehaviour
                 Debug.Log("Good!");
 
                 SwitchToRandomQTEVirtualCamera();
+                SoundEffectsManager.Instance.Play(winClip);
             }
             else
             {
@@ -294,6 +303,7 @@ public class QTEManager : MonoBehaviour
                 Debug.Log("Good!");
 
                 SwitchToRandomQTEVirtualCamera();
+                SoundEffectsManager.Instance.Play(winClip);
             }
             else
             {

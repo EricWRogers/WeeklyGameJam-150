@@ -43,3 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6a8d7f0e344ff34bbc39a7ed93e7652, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startClip: {fileID: 8300000, guid: 4b56b699072b0544688a4d2048f6620c, type: 3}
+  daylightVolume: {fileID: 0}

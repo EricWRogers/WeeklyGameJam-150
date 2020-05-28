@@ -98,7 +98,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 526125878484177586}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.17, y: 0.77, z: -0.95}
+  m_LocalPosition: {x: -0.17, y: 0.63, z: -0.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7302666672371832679}
@@ -1250,7 +1250,7 @@ GameObject:
   - component: {fileID: 7645608698683339008}
   - component: {fileID: 1237112136169324630}
   - component: {fileID: -8668021825920797966}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1326,8 +1326,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cinemachineBrain: {fileID: 0}
   avatar: {fileID: 8386551784887484212}
-  speed: 5
-  rotationSpeed: 4
+  speed: 6
+  rotationSpeed: 8
   gravity: 10
   minimumGravity: 0.01
   canMove: 1
@@ -1346,14 +1346,14 @@ MonoBehaviour:
   currentKey: 0
   initialQTEBuffer: 1
   maxQTEBuffer:
-    min: 2
-    max: 5
+    min: 1
+    max: 2
     selectedDebug: 
   QTEBuffer: 0
-  QTETimer: 2
+  QTETimer: 1.25
   maxQuickTimeEvents:
-    min: 3
-    max: 7
+    min: 2
+    max: 4
     selectedDebug: 
   QTETimerRoot: {fileID: 1329028404539082486}
   QTETimerImage: {fileID: 1891429440322708675}
@@ -1361,6 +1361,9 @@ MonoBehaviour:
   southKey: {fileID: 7044270672994606880}
   westKey: {fileID: 819550733616543520}
   eastKey: {fileID: 4840252153859596545}
+  winClip: {fileID: 8300000, guid: ad374b9040eb0f749b7be3cf78c89453, type: 3}
+  loseClip: {fileID: 8300000, guid: 688b996ff1362eb4285d58cc15f58b1b, type: 3}
+  eatClip: {fileID: 8300000, guid: 9bbff1237b5e4ab47b1e087c2f2d868e, type: 3}
   qteVirtualCameras:
   - {fileID: 4606514240550600871}
   - {fileID: 5418458810969936023}
