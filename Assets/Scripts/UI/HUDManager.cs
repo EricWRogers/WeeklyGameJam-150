@@ -14,8 +14,9 @@ public class HUDManager : SingletonMonoBehaviour<HUDManager>
     private bool CountingDown = false;
     private float OriginalTime = 600.0f;
 
-    private void Awake()
+    new void Awake()
     {
+        base.Awake();
         OriginalTime = GameLengthSec;
     }
 
