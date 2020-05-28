@@ -19,6 +19,6 @@ MonoBehaviour:
     texturingMode: 0
     transmissionMode: 0
     thicknessRemap: {x: 0, y: 6.14635}
-    worldScale: 1
-    ior: 1.424
+    worldScale: 0.1
+    ior: 1.194
     hash: 1077038792

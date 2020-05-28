@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class LevelManager : SingletonMonoBehaviour<LevelManager>
 {
-    [Header("Dev Tools")] [SerializeField] private Transform playerMockLocation;
-
-    public Transform playerLocation => playerMockLocation ?? PlayerModel.Instance.transform;
+    public Transform playerVisiblePoint => PlayerModel.Instance.visibilityCheckPoint;
     
     // Start is called before the first frame update
     void Start()

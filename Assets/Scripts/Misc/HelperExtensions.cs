@@ -185,6 +185,15 @@ public static class HelperExtensions
 
     #endregion
 
+    #region List
+
+    public static T GetRandom<T>(this List<T> self)
+    {
+        return self[Random.Range(0, self.Count)];
+    }
+
+    #endregion
+
     #region Bounds
 
     public static BoundSides GetSides(this Bounds obj, bool includePosition = true)

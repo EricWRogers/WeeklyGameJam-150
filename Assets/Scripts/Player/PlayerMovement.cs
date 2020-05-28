@@ -8,7 +8,6 @@ public class PlayerMovement : MonoBehaviour
 {
     CharacterController charController;
     
-    public GameObject cinemachine;
     public CinemachineBrain cinemachineBrain;
     public GameObject avatar;
 
@@ -21,6 +20,9 @@ public class PlayerMovement : MonoBehaviour
 
     [Range(0.01f, 1f)]
     public float minimumGravity = 0.01f;
+
+    [HideInInspector]
+    public bool canMove = true;
 
     void Awake()
     {
@@ -47,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
         return (forwardDir + rightDir).normalized;
     }
 
-    void Update()
+    void MovePlayer()
     {
         float h = movementInput.x;
         float v = movementInput.y;
@@ -68,5 +70,13 @@ public class PlayerMovement : MonoBehaviour
         }
 
         charController.Move(movementVector * speed * Time.deltaTime);
+    }
+
+    void Update()
+    {
+        if (canMove)
+        {
+            MovePlayer();
+        }
     }
 }
