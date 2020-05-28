@@ -9,6 +9,7 @@ public class PlayerModel : SingletonMonoBehaviour<PlayerModel>
 {
     public Transform visibilityCheckPoint;
     public Transform camperCapturePivot;
+    public Animator animator;
 
     public float maxAttackRadius = 3f;
     public float maxAttackAngle = 30f;
@@ -82,7 +83,7 @@ public class PlayerModel : SingletonMonoBehaviour<PlayerModel>
             return;
         }
 
-        // TODO (Azee): Play attack animation
+        animator.SetTrigger("attack");
 
         var camper = CamperManager.Instance.campers.Find(CanAttackCamper);
         if (camper == null)
