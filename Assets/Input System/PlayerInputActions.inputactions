@@ -168,7 +168,18 @@
                 {
                     "name": "",
                     "id": "8e4c6092-d35a-41d9-87ea-0b4b15e6f24f",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "15e5876a-50b3-4f44-81d7-1fb5de95c317",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -190,7 +201,7 @@
                 {
                     "name": "",
                     "id": "6a4f3191-c8c7-418f-bf7f-f2b9b8a24139",
-                    "path": "<Keyboard>/w",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -212,7 +223,7 @@
                 {
                     "name": "",
                     "id": "f566ebbe-f34b-4557-9608-556dec30849a",
-                    "path": "<Keyboard>/s",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -234,7 +245,7 @@
                 {
                     "name": "",
                     "id": "c39edac8-d14c-4875-9f79-5c8b23a3fd59",
-                    "path": "<Keyboard>/a",
+                    "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -256,7 +267,7 @@
                 {
                     "name": "",
                     "id": "a9e7f648-0a50-43ff-afbb-b190fde340b3",
-                    "path": "<Keyboard>/d",
+                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
