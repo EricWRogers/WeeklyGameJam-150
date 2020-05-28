@@ -12,6 +12,12 @@ public class HUDManager : SingletonMonoBehaviour<HUDManager>
     public TMP_Text TimeTillDawn = null;
     public GameObject PauseMenu = null;
     public RectTransform TimeBar = null;
+    public string EatenString = "Eaten";
+    public TMP_Text EatenText = null;
+    public string LeftString = "Left";
+    public TMP_Text LeftText = null;
+    public string ExcapeString = "Excape";
+    public TMP_Text ExcapeText = null;
 
     private bool CountingDown = false;
     private float OriginalTime = 600.0f;
@@ -114,6 +120,10 @@ public class HUDManager : SingletonMonoBehaviour<HUDManager>
             TimeTillDawn.text = hour + " : 0" + min + " AM";
         else
             TimeTillDawn.text = hour + " : " + min + " AM";
+        
+        EatenText.text = EatenString + " : " + PlayerModel.Instance.campersEaten;
+        LeftText.text = LeftString + " : " + LevelManager.Instance.campersRemaining;
+        ExcapeText.text = ExcapeString + " : " + (CamperManager.Instance.campersCount - PlayerModel.Instance.campersEaten - LevelManager.Instance.campersRemaining);
     }
     private void _UpdateTimeBar(float sec,float maxTime)
     {
