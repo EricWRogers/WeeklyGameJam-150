@@ -119,6 +119,7 @@ public class CamperManager : SingletonMonoBehaviour<CamperManager>
         {
             if (timeSinceLastNoiseHint > noiseHintIntervalRange.selected)
             {
+                timeSinceLastNoiseHint = 0;
                 noiseHintIntervalRange.SelectRandom();
 
                 SoundEffectsManager.Instance.Play(noiseClip);
