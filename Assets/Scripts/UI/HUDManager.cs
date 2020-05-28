@@ -11,14 +11,17 @@ public class HUDManager : SingletonMonoBehaviour<HUDManager>
     public float GameLengthSec = 600.0f;
     public TMP_Text TimeTillDawn = null;
     public GameObject PauseMenu = null;
+    public RectTransform TimeBar = null;
 
     private bool CountingDown = false;
     private float OriginalTime = 600.0f;
+    private float OriginalTimeBarWidth = 400.0f;
 
     new void Awake()
     {
         base.Awake();
         OriginalTime = GameLengthSec;
+        OriginalTimeBarWidth = TimeBar.rect.width;
     }
 
     void Start()
@@ -79,7 +82,8 @@ public class HUDManager : SingletonMonoBehaviour<HUDManager>
         if (CountingDown)
         {
             GameLengthSec = _UpdateCountDown(GameLengthSec, dt);
-            _UpdateClockUI(GameLengthSec);
+            _UpdateClockUI(GameLengthSec, (6 * 3600));
+            _UpdateTimeBar(GameLengthSec, (6 * 3600));
 
             if (GameLengthSec <= 0.0f)
             {
@@ -88,13 +92,15 @@ public class HUDManager : SingletonMonoBehaviour<HUDManager>
             }
         }
     }
-    private void _UpdateClockUI(float sec)
+    private void _UpdateClockUI(float sec,float maxTime)
     {
         if (sec < 0.0f)
             sec = 0.0f;
 
         float invertedTimeLeft = OriginalTime - sec;
-        sec = (invertedTimeLeft * (6 * 3600)) / OriginalTime;
+        sec = (invertedTimeLeft * maxTime) / OriginalTime;
+
+        
 
 
         int hour = (int)((sec / 60) / 60);
@@ -109,9 +115,20 @@ public class HUDManager : SingletonMonoBehaviour<HUDManager>
         else
             TimeTillDawn.text = hour + " : " + min + " AM";
     }
+    private void _UpdateTimeBar(float sec,float maxTime)
+    {
+        if (sec < 0.0f)
+            sec = 0.0f;
+
+        float width = (sec * OriginalTimeBarWidth) / OriginalTime;
+
+        Debug.Log(width);
+
+        TimeBar.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width);
+    }
     private void _GameOver()
     {
-        _UpdateClockUI(0.0f);
+        _UpdateClockUI(0.0f,(6 * 3600));
         Debug.Log("GameOver");
         LevelManager.Instance.PlayGameOverSequence();
     }
