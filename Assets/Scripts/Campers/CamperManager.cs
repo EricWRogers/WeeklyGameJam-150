@@ -18,14 +18,13 @@ public class CamperManager : SingletonMonoBehaviour<CamperManager>
 
     public AudioClip runningClip;
 
-    [Header("Run to TargetBase Stats")]
-    public RangeFloat initialRunToTargetBaseDelayRange;
+    [Header("Run to TargetBase Stats")] public RangeFloat initialRunToTargetBaseDelayRange;
     public RangeFloat runToTargetBaseIntervalRange;
     public RangeInt campersPerTargetRunRange;
     public float minTargetBaseToPlayerAngleToRun = 30f;
 
-    [Header("Debug")]
-    [SerializeField] [ReadOnly] private int _campersSafe = 0;
+    [Header("Debug")] [SerializeField] [ReadOnly]
+    private int _campersSafe = 0;
 
     public List<Camper> campers { get; } = new List<Camper>();
     public Randomizer<HidingSpot> hidingSpotsRandomizer { get; private set; }
@@ -122,7 +121,30 @@ public class CamperManager : SingletonMonoBehaviour<CamperManager>
                 timeSinceLastNoiseHint = 0;
                 noiseHintIntervalRange.SelectRandom();
 
-                SoundEffectsManager.Instance.Play(noiseClip);
+                var availableCampers = CamperManager.Instance.campers.Where(camper =>
+                    camper.curState == CamperState.Hiding || camper.curState == CamperState.Moving).ToList();
+
+                Camper closestCamper = null;
+                var closestDist = Mathf.Infinity;
+                foreach (var availableCamper in availableCampers)
+                {
+                    var dist = Vector3.Distance(PlayerModel.Instance.transform.position,
+                        availableCamper.transform.position);
+                    if (dist < closestDist)
+                    {
+                        closestDist = dist;
+                        closestCamper = availableCamper;
+                    }
+                }
+
+                if (closestCamper)
+                {
+                    var playerToClosestCamper =
+                        (closestCamper.transform.position - PlayerModel.Instance.transform.position).GetYLess();
+                    
+                    SoundEffectsManager.Instance.PlayAt(noiseClip, PlayerModel.Instance.mainCamera.transform.position + playerToClosestCamper.normalized);
+                    NoiseDirectionIndicatorManager.Instance.IndicateNoiseFrom(closestCamper.transform.position);
+                }
             }
         }
     }

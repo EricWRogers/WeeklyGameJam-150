@@ -90,7 +90,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 5
+  m_Speed: 6.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 200
@@ -118,14 +118,14 @@ MonoBehaviour:
   model: {fileID: 6513597977166954292}
   visionRoot: {fileID: 6977836763913514759}
   navMeshAgent: {fileID: 2747985653096566257}
-  maxVisionRange: 30
-  maxVisionAngle: 30
+  maxVisionRange: 20
+  maxVisionAngle: 60
   hidingOrientationChangeDuration: 0.3
   maxHideDurationRange:
     min: 10
     max: 20
     selectedDebug: 
-  maxDistanceToSenseMonster: 5
+  maxDistanceToSenseMonster: 2
   capturedLocalOffset: {x: -0.012, y: -0.302, z: 0.032}
   capturedLocalRotation: {x: 0, y: 180, z: 0}
   _btnMoveToNewHidingSpot: 0

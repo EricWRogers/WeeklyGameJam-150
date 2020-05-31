@@ -73,7 +73,7 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
         }
 
         var rankIndex = (PlayerModel.Instance.campersEaten * ranks.Length) / CamperManager.Instance.campersCount;
-        rankIndex = ranks.Length - rankIndex;
+        rankIndex = ranks.Length - 1 - rankIndex;
         return ranks[Mathf.Clamp(rankIndex, 0, ranks.Length - 1)];
     }
 }

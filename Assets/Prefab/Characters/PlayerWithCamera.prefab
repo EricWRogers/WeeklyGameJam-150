@@ -1078,6 +1078,11 @@ PrefabInstance:
       propertyPath: thirdPersonVirtualCamera
       value: 
       objectReference: {fileID: 4373487822172642140}
+    - target: {fileID: 3683141596007942747, guid: a7b4c41f67d7a984fafcb26ea57a0355,
+        type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 2136243795}
     - target: {fileID: 7645608698683339002, guid: a7b4c41f67d7a984fafcb26ea57a0355,
         type: 3}
       propertyPath: m_Name

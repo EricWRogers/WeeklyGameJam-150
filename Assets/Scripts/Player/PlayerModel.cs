@@ -12,6 +12,7 @@ public class PlayerModel : SingletonMonoBehaviour<PlayerModel>
     public Transform camperCapturePivot;
     public CinemachineVirtualCameraBase thirdPersonVirtualCamera;
     public Animator animator;
+    public Camera mainCamera;
 
     public float maxAttackRadius = 3f;
     public float maxAttackAngle = 30f;
